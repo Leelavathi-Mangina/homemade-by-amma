@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const notFound = require("./middleware/notFound");
+const errorHandler = require("./middleware/errorHandler");
+
 
 const app = express();
 
@@ -16,5 +19,8 @@ app.get("/api/health", (req, res) => {
     message: "Homemade by Amma API is running",
   });
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 module.exports = app;
