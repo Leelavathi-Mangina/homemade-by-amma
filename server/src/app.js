@@ -2,8 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const categoryRoutes = require("./routes/categoryRoutes");
+const productRoutes = require("./routes/productRoutes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
+
 
 
 const app = express();
@@ -24,6 +26,11 @@ app.get("/api/health", (req, res) => {
 app.use(
   "/api/categories",
   categoryRoutes
+);
+
+app.use(
+  "/api/products",
+  productRoutes
 );
 
 app.use(notFound);
