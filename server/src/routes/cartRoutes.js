@@ -7,6 +7,7 @@ const {
 const {
   addToCart,
   getCart,
+  updateCartItem,
 } = require("../controllers/cartController");
 
 const router = express.Router();
@@ -21,6 +22,12 @@ router.get(
   "/",
   protect,
   getCart
+);
+
+router.put(
+  "/update",
+  protect,
+  updateCartItem
 );
 
 module.exports = router;

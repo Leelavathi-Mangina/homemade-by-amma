@@ -86,7 +86,54 @@ const getCart = asyncHandler(
   }
 );
 
+
+const updateCartItem = asyncHandler(
+  async (req, res) => {
+    const { productId, quantity } = req.body;
+
+    const cart = await Cart.findOne({
+      user: req.user._id,
+    });
+
+    if (!cart) {
+      return res.status(404).json(
+        new ApiResponse(
+          false,
+          "Cart not found"
+        )
+      );
+    }
+
+    const item = cart.items.find(
+      (item) =>
+        item.product.toString() === productId
+    );
+
+    if (!item) {
+      return res.status(404).json(
+        new ApiResponse(
+          false,
+          "Product not found in cart"
+        )
+      );
+    }
+
+    item.quantity = quantity;
+
+    await cart.save();
+
+    res.status(200).json(
+      new ApiResponse(
+        true,
+        "Cart updated successfully",
+        cart
+      )
+    );
+  }
+);
+
 module.exports = {
   addToCart,
   getCart,
+  updateCartItem,
 };
