@@ -8,6 +8,7 @@ const {
   addToCart,
   getCart,
   updateCartItem,
+  removeCartItem,
 } = require("../controllers/cartController");
 
 const router = express.Router();
@@ -28,6 +29,12 @@ router.put(
   "/update",
   protect,
   updateCartItem
+);
+
+router.delete(
+  "/remove/:productId",
+  protect,
+  removeCartItem
 );
 
 module.exports = router;

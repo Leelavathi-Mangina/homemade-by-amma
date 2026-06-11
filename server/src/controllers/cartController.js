@@ -132,8 +132,43 @@ const updateCartItem = asyncHandler(
   }
 );
 
+const removeCartItem = asyncHandler(
+  async (req, res) => {
+    const { productId } = req.params;
+
+    const cart = await Cart.findOne({
+      user: req.user._id,
+    });
+
+    if (!cart) {
+      return res.status(404).json(
+        new ApiResponse(
+          false,
+          "Cart not found"
+        )
+      );
+    }
+
+    cart.items = cart.items.filter(
+      (item) =>
+        item.product.toString() !== productId
+    );
+
+    await cart.save();
+
+    res.status(200).json(
+      new ApiResponse(
+        true,
+        "Item removed from cart",
+        cart
+      )
+    );
+  }
+);
+
 module.exports = {
   addToCart,
   getCart,
   updateCartItem,
+  removeCartItem,
 };
