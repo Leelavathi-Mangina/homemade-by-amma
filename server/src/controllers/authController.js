@@ -74,6 +74,72 @@ const registerUser = asyncHandler(
   }
 );
 
+
+const loginUser = asyncHandler(
+  async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json(
+        new ApiResponse(
+          false,
+          "Email and password are required"
+        )
+      );
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json(
+        new ApiResponse(
+          false,
+          "Invalid credentials"
+        )
+      );
+    }
+
+    const isPasswordMatch =
+      await bcrypt.compare(
+        password,
+        user.password
+      );
+
+    if (!isPasswordMatch) {
+      return res.status(401).json(
+        new ApiResponse(
+          false,
+          "Invalid credentials"
+        )
+      );
+    }
+
+    const token =
+      generateToken(user._id);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge:
+        7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(200).json(
+      new ApiResponse(
+        true,
+        "Login successful",
+        {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        }
+      )
+    );
+  }
+);
+
+
 module.exports = {
   registerUser,
+  loginUser,
 };
