@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const categoryRoutes = require("./routes/categoryRoutes");
 const productRoutes = require("./routes/productRoutes");
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -35,6 +36,8 @@ app.use(
 );
 
 app.use("/api/auth", authRoutes);
+
+app.use("/api/users", userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
