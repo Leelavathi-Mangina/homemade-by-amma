@@ -69,6 +69,24 @@ const addToCart = asyncHandler(
   }
 );
 
+
+const getCart = asyncHandler(
+  async (req, res) => {
+    const cart = await Cart.findOne({
+      user: req.user._id,
+    }).populate("items.product");
+
+    res.status(200).json(
+      new ApiResponse(
+        true,
+        "Cart fetched successfully",
+        cart
+      )
+    );
+  }
+);
+
 module.exports = {
   addToCart,
+  getCart,
 };
