@@ -43,6 +43,27 @@ const protect = asyncHandler(
   }
 );
 
+
+const adminOnly = (
+  req,
+  res,
+  next
+) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json(
+      new ApiResponse(
+        false,
+        "Access denied. Admin only."
+      )
+    );
+  }
+
+  next();
+};
+
+
+
 module.exports = {
   protect,
+  adminOnly,
 };
