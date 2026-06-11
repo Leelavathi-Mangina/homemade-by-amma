@@ -44,10 +44,11 @@ Products are prepared only after order confirmation to ensure freshness and qual
 * MongoDB Atlas
 * Mongoose
 
-### Authentication (Upcoming)
+### Authentication
 
 * JWT
-* Cookies
+* HTTP-Only Cookies
+* bcrypt Password Hashing
 
 ### Payments (Upcoming)
 
@@ -88,6 +89,27 @@ Products are prepared only after order confirmation to ensure freshness and qual
 * Duplicate slug validation
 * Category existence validation
 
+### Phase 5 - Authentication & Authorization
+
+#### Authentication
+
+* User registration API
+* User login API
+* Password hashing using bcrypt
+* JWT token generation
+* Cookie-based authentication
+
+#### Protected Routes
+
+* Authentication middleware
+* Protected user profile route
+
+#### Authorization
+
+* Role-based access control
+* Admin-only middleware
+* Protected admin dashboard route
+
 ---
 
 ## Project Structure
@@ -104,16 +126,44 @@ homemade-by-amma/
 
 ---
 
+## Current Database Collections
+
+* users
+* categories
+* products
+
+---
+
 ## Upcoming Features
 
-* User Authentication
+### Phase 6
+
 * Cart Management
 * 7-Day Cart Expiry
+
+### Phase 7
+
 * Order Management
+
+### Phase 8
+
 * Razorpay Integration
-* Admin Dashboard
+
+### Phase 9
+
+* Admin Dashboard UI
+
+### Phase 10
+
+* Deployment & Production Setup
+
+### Future Enhancements
+
 * SEO Optimization
 * Delivery Management
+* Customer Reviews
+* Order Tracking
+* WhatsApp Notifications
 
 ---
 
@@ -121,4 +171,4 @@ homemade-by-amma/
 
 Mangina Leelavathi Satya Krishna Priya
 
-Built with ❤️ for my mother’s homemade food business.
+Built with ❤️ for my mother's homemade food business.
