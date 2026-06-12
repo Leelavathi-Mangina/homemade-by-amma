@@ -52,7 +52,7 @@ npm run dev
 
 Runs on:
 
-```text
+```text id="1wzpw7"
 http://localhost:3000
 ```
 
@@ -68,7 +68,7 @@ npm run dev
 
 Runs on:
 
-```text
+```text id="1khmld"
 http://localhost:5000
 ```
 
@@ -85,10 +85,11 @@ Current Collections:
 * users
 * categories
 * products
+* carts
 
-Connection Flow:
+Connection Flow
 
-```text
+```text id="jl6fxc"
 Application
      ↓
 MongoDB Connection String
@@ -97,6 +98,27 @@ MongoDB Atlas Cluster
      ↓
 Database Collections
 ```
+
+---
+
+# Backend Architecture
+
+Current shared backend components:
+
+## Constants
+
+* roles.js
+* orderStatus.js
+* paymentStatus.js
+* apiMessages.js
+
+## Utilities
+
+* generateOrderId.js
+* ApiResponse.js
+* asyncHandler.js
+
+These shared components improve maintainability, consistency, and scalability for future development.
 
 ---
 
@@ -112,10 +134,11 @@ Security Features:
 * HTTP-only cookies
 * Protected routes
 * Role-based authorization
+* User-specific resource protection
 
-Authentication Flow:
+Authentication Flow
 
-```text
+```text id="9o3xv6"
 Register
    ↓
 Hash Password
@@ -126,10 +149,25 @@ Login
    ↓
 Generate JWT
    ↓
-Store Cookie
+Store HTTP-Only Cookie
    ↓
 Access Protected APIs
 ```
+
+---
+
+# Shopping Cart Features
+
+Implemented:
+
+* User-specific cart
+* Add product to cart
+* View cart
+* Update product quantity
+* Remove individual item
+* Clear entire cart
+* Automatic 7-day cart expiry
+* Product population using Mongoose
 
 ---
 
@@ -160,6 +198,7 @@ Responsibilities:
 * REST API hosting
 * Authentication
 * Business logic
+* Shopping cart management
 * Database communication
 
 ---
@@ -173,8 +212,9 @@ Platform:
 Responsibilities:
 
 * User data
-* Product data
 * Category data
+* Product data
+* Cart data
 * Future order data
 
 ---
@@ -189,18 +229,23 @@ Used for:
 * Category images
 * Optimized image delivery
 
+---
+
 ## Razorpay
 
 Used for:
 
 * Online payments
-* Order payment verification
+* Payment verification
+* Secure transactions
+
+---
 
 ## Custom Domain
 
 Example:
 
-```text
+```text id="e8ly8n"
 www.homemadebyamma.com
 ```
 
@@ -212,13 +257,22 @@ www.homemadebyamma.com
 
 * MongoDB Atlas Setup
 * Environment Variables Setup
-* Authentication System
-* Role-Based Authorization
+* Category Module
+* Product Module
+* Authentication & Authorization
+* Shopping Cart Module
+* Shared Constants
+* Utility Helpers
+
+---
 
 ## Pending
 
+* Order Management
+* Razorpay Integration
+* Cloudinary Integration
 * Frontend Deployment
 * Backend Deployment
-* Cloudinary Integration
-* Razorpay Integration
 * Production Domain Setup
+* SSL Configuration
+* Performance Optimization

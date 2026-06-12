@@ -110,6 +110,37 @@ Products are prepared only after order confirmation to ensure freshness and qual
 * Admin-only middleware
 * Protected admin dashboard route
 
+### Phase 6 - Shopping Cart Module
+
+#### Cart Management
+
+* Cart schema
+* Add product to cart
+* View cart
+* Update product quantity
+* Remove individual cart item
+* Clear entire cart
+
+#### Cart Features
+
+* User-specific cart
+* Product population using Mongoose
+* Automatic 7-day cart expiry
+* JWT-protected cart APIs
+* Quantity management
+* Persistent cart storage
+
+### Project Architecture Improvements
+
+* Shared constants for:
+
+  * Roles
+  * Order Status
+  * Payment Status
+  * API Messages
+* Utility helper for generating Order IDs
+* Scalable backend architecture for future business modules
+
 ---
 
 ## Project Structure
@@ -119,6 +150,15 @@ homemade-by-amma/
 │
 ├── client/
 ├── server/
+│   ├── src/
+│   │   ├── constants/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   └── ...
+│
 ├── docs/
 │
 └── README.md
@@ -131,19 +171,18 @@ homemade-by-amma/
 * users
 * categories
 * products
+* carts
 
 ---
 
 ## Upcoming Features
 
-### Phase 6
-
-* Cart Management
-* 7-Day Cart Expiry
-
 ### Phase 7
 
 * Order Management
+* Order Status Tracking
+* Customer Order History
+* Admin Order Management
 
 ### Phase 8
 
@@ -164,6 +203,7 @@ homemade-by-amma/
 * Customer Reviews
 * Order Tracking
 * WhatsApp Notifications
+* Email Notifications
 
 ---
 

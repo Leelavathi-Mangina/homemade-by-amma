@@ -40,16 +40,48 @@ Serve APIs
 server
 │
 ├── config
+├── constants
 ├── controllers
 ├── middleware
 ├── models
 ├── routes
-├── services
 ├── utils
 ├── server.js
 │
 └── .env
 ```
+
+---
+
+# Shared Components
+
+## Constants
+
+* roles.js
+* orderStatus.js
+* paymentStatus.js
+* apiMessages.js
+
+Purpose:
+
+* Centralized user roles
+* Order status management
+* Payment status management
+* Consistent API response messages
+
+---
+
+## Utilities
+
+* generateOrderId.js
+* ApiResponse.js
+* asyncHandler.js
+
+Purpose:
+
+* Generate unique business order IDs
+* Standardize API responses
+* Handle asynchronous errors
 
 ---
 
@@ -103,12 +135,35 @@ Roles:
 
 ---
 
+## Cart Module
+
+### Cart
+
+* user
+* items
+* product
+* quantity
+* expiresAt
+
+Features:
+
+* User-specific shopping cart
+* Add products
+* Update quantity
+* Remove item
+* Clear cart
+* Automatic 7-day expiry
+* Product population using Mongoose
+
+---
+
 # Database Collections
 
 ```text
 users
 categories
 products
+carts
 ```
 
 ---
@@ -120,9 +175,22 @@ Category (1)
       │
       ▼
 Product (Many)
-```
 
-A category can contain multiple products.
+User (1)
+      │
+      ▼
+Cart (1)
+
+Cart (1)
+      │
+      ▼
+Cart Items (Many)
+
+Product (1)
+      │
+      ▼
+Cart Items (Many)
+```
 
 ---
 
@@ -172,6 +240,30 @@ Allow / Deny Access
 
 ---
 
+# Cart Flow
+
+```text
+User Login
+      ↓
+Authenticate User
+      ↓
+Add Product to Cart
+      ↓
+Create Cart (if not exists)
+      ↓
+Update Existing Cart
+      ↓
+View Cart
+      ↓
+Update Quantity
+      ↓
+Remove Item
+      ↓
+Clear Cart
+```
+
+---
+
 # Security Features
 
 * Password Hashing (bcrypt)
@@ -180,19 +272,29 @@ Allow / Deny Access
 * Protected Routes
 * Role-Based Authorization
 * Admin Access Control
+* User-specific cart protection
+
+---
+
+# Current Project Progress
+
+* ✅ Phase 1 – Project Setup
+* ✅ Phase 2 – Database & Categories
+* ✅ Phase 3 – Product Module
+* ✅ Phase 4 – Product Validation
+* ✅ Phase 5 – Authentication & Authorization
+* ✅ Phase 6 – Shopping Cart Module
 
 ---
 
 # Upcoming Modules
 
-## Phase 6
-
-* Cart Module
-* 7-Day Cart Expiry
-
 ## Phase 7
 
 * Order Management
+* Customer Order History
+* Order Status Tracking
+* Admin Order Management
 
 ## Phase 8
 

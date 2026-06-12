@@ -39,9 +39,29 @@ Request Body
 }
 ```
 
+Success Response
+
+```json
+{
+  "success": true,
+  "message": "Category created successfully"
+}
+```
+
+---
+
 ## Get Categories
 
 ### GET /categories
+
+Success Response
+
+```json
+{
+  "success": true,
+  "message": "Categories fetched successfully"
+}
+```
 
 ---
 
@@ -64,9 +84,29 @@ Request Body
 }
 ```
 
+Success Response
+
+```json
+{
+  "success": true,
+  "message": "Product created successfully"
+}
+```
+
+---
+
 ## Get Products
 
 ### GET /products
+
+Success Response
+
+```json
+{
+  "success": true,
+  "message": "Products fetched successfully"
+}
+```
 
 ---
 
@@ -182,7 +222,136 @@ Failure Response
 
 ---
 
-# Security Features
+# Cart
+
+All cart APIs require user authentication.
+
+## Add Product to Cart
+
+### POST /cart/add
+
+Authentication Required
+
+Request Body
+
+```json
+{
+  "productId": "6a2824bdfdd5a4914af63683",
+  "quantity": 2
+}
+```
+
+Success Response
+
+```json
+{
+  "success": true,
+  "message": "Product added to cart"
+}
+```
+
+---
+
+## Get User Cart
+
+### GET /cart
+
+Authentication Required
+
+Success Response
+
+```json
+{
+  "success": true,
+  "message": "Cart fetched successfully"
+}
+```
+
+---
+
+## Update Cart Quantity
+
+### PUT /cart/update
+
+Authentication Required
+
+Request Body
+
+```json
+{
+  "productId": "6a2824bdfdd5a4914af63683",
+  "quantity": 5
+}
+```
+
+Success Response
+
+```json
+{
+  "success": true,
+  "message": "Cart updated successfully"
+}
+```
+
+---
+
+## Remove Cart Item
+
+### DELETE /cart/remove/:productId
+
+Authentication Required
+
+Example
+
+```text
+DELETE /cart/remove/6a2824bdfdd5a4914af63683
+```
+
+Success Response
+
+```json
+{
+  "success": true,
+  "message": "Item removed from cart"
+}
+```
+
+---
+
+## Clear Cart
+
+### DELETE /cart/clear
+
+Authentication Required
+
+Success Response
+
+```json
+{
+  "success": true,
+  "message": "Cart cleared successfully"
+}
+```
+
+---
+
+# Cart Features
+
+Implemented:
+
+* User-specific shopping cart
+* Add products to cart
+* View cart
+* Update product quantity
+* Remove individual items
+* Clear entire cart
+* Automatic 7-day cart expiry
+* Product population using Mongoose
+* JWT-protected cart APIs
+
+---
+
+# Authentication & Security
 
 Implemented:
 
@@ -192,3 +361,5 @@ Implemented:
 * Protected routes
 * Role-based authorization
 * Admin access control
+* Secure user-specific cart operations
+* Protected cart APIs using authentication middleware
