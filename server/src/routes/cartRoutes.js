@@ -9,6 +9,7 @@ const {
   getCart,
   updateCartItem,
   removeCartItem,
+  clearCart,
 } = require("../controllers/cartController");
 
 const router = express.Router();
@@ -35,6 +36,12 @@ router.delete(
   "/remove/:productId",
   protect,
   removeCartItem
+);
+
+router.delete(
+  "/clear",
+  protect,
+  clearCart
 );
 
 module.exports = router;

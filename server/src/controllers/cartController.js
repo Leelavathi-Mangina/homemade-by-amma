@@ -166,9 +166,40 @@ const removeCartItem = asyncHandler(
   }
 );
 
+
+const clearCart = asyncHandler(
+  async (req, res) => {
+    const cart = await Cart.findOne({
+      user: req.user._id,
+    });
+
+    if (!cart) {
+      return res.status(404).json(
+        new ApiResponse(
+          false,
+          "Cart not found"
+        )
+      );
+    }
+
+    cart.items = [];
+
+    await cart.save();
+
+    res.status(200).json(
+      new ApiResponse(
+        true,
+        "Cart cleared successfully",
+        cart
+      )
+    );
+  }
+);
+
 module.exports = {
   addToCart,
   getCart,
   updateCartItem,
   removeCartItem,
+  clearCart,
 };
