@@ -17,7 +17,7 @@ Products are prepared only after order confirmation to ensure freshness and qual
 
 ---
 
-## Categories
+# Categories
 
 * Sweets
 * Pickles
@@ -27,128 +27,180 @@ Products are prepared only after order confirmation to ensure freshness and qual
 
 ---
 
-## Tech Stack
+# Tech Stack
 
-### Frontend
+## Frontend
 
 * Next.js
 * Tailwind CSS
 
-### Backend
+## Backend
 
 * Node.js
 * Express.js
 
-### Database
+## Database
 
 * MongoDB Atlas
 * Mongoose
 
-### Authentication
+## Authentication
 
 * JWT
 * HTTP-Only Cookies
 * bcrypt Password Hashing
 
-### Payments (Upcoming)
+## Payments (Upcoming)
 
 * Razorpay
 
-### Image Storage (Upcoming)
+## Image Storage (Upcoming)
 
 * Cloudinary
 
 ---
 
-## Features Completed
+# Features Completed
 
-### Phase 1 - Project Setup
+## Phase 1 – Project Setup
 
 * Full-stack project structure
 * Frontend setup
 * Backend setup
 * GitHub repository setup
 
-### Phase 2 - Database & Categories
+---
+
+## Phase 2 – Database & Categories
 
 * MongoDB Atlas integration
 * Category schema
-* Category APIs
+* Category CRUD APIs
 
-### Phase 3 - Product Module
+---
+
+## Phase 3 – Product Module
 
 * Product schema
-* Product APIs
-* Category-product relationship
-* Mongoose populate()
+* Product CRUD APIs
+* Category–Product relationship
+* Mongoose Populate
 
-### Phase 4 - Product Validation
+---
+
+## Phase 4 – Product Validation
 
 * Required field validation
-* Duplicate productId validation
+* Duplicate Product ID validation
 * Duplicate slug validation
 * Category existence validation
 
-### Phase 5 - Authentication & Authorization
+---
 
-#### Authentication
+## Phase 5 – Authentication & Authorization
 
-* User registration API
-* User login API
-* Password hashing using bcrypt
-* JWT token generation
-* Cookie-based authentication
+### Authentication
 
-#### Protected Routes
+* User Registration
+* User Login
+* Password hashing with bcrypt
+* JWT Authentication
+* HTTP-Only Cookie Authentication
+
+### Protected Routes
 
 * Authentication middleware
-* Protected user profile route
+* Protected Profile API
 
-#### Authorization
+### Authorization
 
-* Role-based access control
+* Role-based Access Control
 * Admin-only middleware
-* Protected admin dashboard route
+* Protected Admin APIs
 
-### Phase 6 - Shopping Cart Module
+---
 
-#### Cart Management
+## Phase 6 – Shopping Cart Module
+
+### Cart Management
 
 * Cart schema
 * Add product to cart
 * View cart
-* Update product quantity
-* Remove individual cart item
-* Clear entire cart
+* Update quantity
+* Remove cart item
+* Clear cart
 
-#### Cart Features
+### Cart Features
 
-* User-specific cart
-* Product population using Mongoose
+* User-specific carts
+* Product population
 * Automatic 7-day cart expiry
-* JWT-protected cart APIs
-* Quantity management
+* JWT-protected APIs
 * Persistent cart storage
-
-### Project Architecture Improvements
-
-* Shared constants for:
-
-  * Roles
-  * Order Status
-  * Payment Status
-  * API Messages
-* Utility helper for generating Order IDs
-* Scalable backend architecture for future business modules
 
 ---
 
-## Project Structure
+## Phase 7 – Order Management
+
+### Customer Features
+
+* Place Order
+* Get My Orders
+* Get Single Order Details
+
+### Admin Features
+
+* Get All Orders
+* Get Single Order Details
+* Update Order Status
+* Update Payment Status
+
+### Business Logic
+
+* Auto-generated Order IDs
+* Order Status workflow validation
+* Payment Status workflow validation
+* Delivery Address support
+* Preferred Delivery Date
+* Order Notes
+* User population
+* Order history
+* Secure admin-only endpoints
+
+---
+
+## Architecture Improvements
+
+### Shared Constants
+
+* Roles
+* Order Status
+* Payment Status
+* API Messages
+
+### Utility Helpers
+
+* Order ID Generator
+* Order Status Transition Validator
+* Payment Status Transition Validator
+
+### Backend Improvements
+
+* Centralized constants
+* Cleaner controller logic
+* Scalable folder structure
+* Consistent API responses
+
+---
+
+# Project Structure
 
 ```text
 homemade-by-amma/
 │
 ├── client/
+│
 ├── server/
 │   ├── src/
 │   │   ├── constants/
@@ -166,49 +218,60 @@ homemade-by-amma/
 
 ---
 
-## Current Database Collections
+# Current Database Collections
 
 * users
 * categories
 * products
 * carts
+* orders
 
 ---
 
-## Upcoming Features
+# Upcoming Features
 
-### Phase 7
-
-* Order Management
-* Order Status Tracking
-* Customer Order History
-* Admin Order Management
-
-### Phase 8
+## Phase 8 – Payment Integration
 
 * Razorpay Integration
+* Online Payments
+* Payment Verification
 
-### Phase 9
+---
 
-* Admin Dashboard UI
+## Phase 9 – Admin Dashboard
 
-### Phase 10
+* Dashboard UI
+* Order Management UI
+* Product Management UI
+* Category Management UI
 
-* Deployment & Production Setup
+---
 
-### Future Enhancements
+## Phase 10 – Deployment
 
+* Backend Deployment
+* Frontend Deployment
+* Production Configuration
+
+---
+
+# Future Enhancements
+
+* Cloudinary Image Upload
 * SEO Optimization
 * Delivery Management
-* Customer Reviews
 * Order Tracking
 * WhatsApp Notifications
 * Email Notifications
+* Customer Reviews & Ratings
+* Coupons & Discounts
+* Inventory Management
+* Analytics Dashboard
 
 ---
 
-## Author
+# Author
 
-Mangina Leelavathi Satya Krishna Priya
+**Mangina Leelavathi Satya Krishna Priya**
 
 Built with ❤️ for my mother's homemade food business.

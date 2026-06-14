@@ -9,7 +9,8 @@
 
 ### Backend
 
-* Node.js + Express.js
+* Node.js
+* Express.js
 * Deployment Platform: Render
 
 ### Database
@@ -30,7 +31,7 @@
 
 ## Backend (.env)
 
-```env
+```env id="44u9g2"
 PORT=5000
 
 MONGODB_URI=your_mongodb_connection_string
@@ -44,7 +45,7 @@ JWT_SECRET=your_jwt_secret
 
 ## Frontend
 
-```bash
+```bash id="rfqf5l"
 cd client
 npm install
 npm run dev
@@ -52,7 +53,7 @@ npm run dev
 
 Runs on:
 
-```text id="1wzpw7"
+```text id="hr0jtk"
 http://localhost:3000
 ```
 
@@ -60,7 +61,7 @@ http://localhost:3000
 
 ## Backend
 
-```bash
+```bash id="24clrz"
 cd server
 npm install
 npm run dev
@@ -68,7 +69,7 @@ npm run dev
 
 Runs on:
 
-```text id="1khmld"
+```text id="ydcr89"
 http://localhost:5000
 ```
 
@@ -86,10 +87,11 @@ Current Collections:
 * categories
 * products
 * carts
+* orders
 
-Connection Flow
+### Connection Flow
 
-```text id="jl6fxc"
+```text id="pxo94z"
 Application
      ↓
 MongoDB Connection String
@@ -103,8 +105,6 @@ Database Collections
 
 # Backend Architecture
 
-Current shared backend components:
-
 ## Constants
 
 * roles.js
@@ -117,8 +117,17 @@ Current shared backend components:
 * generateOrderId.js
 * ApiResponse.js
 * asyncHandler.js
+* orderStatusTransition.js
+* paymentStatusTransition.js
 
-These shared components improve maintainability, consistency, and scalability for future development.
+### Benefits
+
+These shared components improve:
+
+* Maintainability
+* Code consistency
+* Reusability
+* Scalability
 
 ---
 
@@ -135,10 +144,12 @@ Security Features:
 * Protected routes
 * Role-based authorization
 * User-specific resource protection
+* Order ownership verification
+* Admin-only order management
 
-Authentication Flow
+### Authentication Flow
 
-```text id="9o3xv6"
+```text id="nr4miv"
 Register
    ↓
 Hash Password
@@ -171,6 +182,26 @@ Implemented:
 
 ---
 
+# Order Management Features
+
+Implemented:
+
+* Place order
+* Auto-generated Order IDs
+* Customer order history
+* Customer order details
+* Admin order listing
+* Admin order details
+* Order status updates
+* Payment status updates
+* Order status workflow validation
+* Payment status workflow validation
+* Delivery address support
+* Preferred delivery date
+* Order notes
+
+---
+
 # Planned Production Deployment
 
 ## Frontend Deployment
@@ -198,7 +229,8 @@ Responsibilities:
 * REST API hosting
 * Authentication
 * Business logic
-* Shopping cart management
+* Cart management
+* Order management
 * Database communication
 
 ---
@@ -215,7 +247,7 @@ Responsibilities:
 * Category data
 * Product data
 * Cart data
-* Future order data
+* Order data
 
 ---
 
@@ -238,6 +270,7 @@ Used for:
 * Online payments
 * Payment verification
 * Secure transactions
+* Payment webhooks
 
 ---
 
@@ -245,7 +278,7 @@ Used for:
 
 Example:
 
-```text id="e8ly8n"
+```text id="w2o3ua"
 www.homemadebyamma.com
 ```
 
@@ -255,24 +288,30 @@ www.homemadebyamma.com
 
 ## Completed
 
-* MongoDB Atlas Setup
-* Environment Variables Setup
-* Category Module
-* Product Module
-* Authentication & Authorization
-* Shopping Cart Module
-* Shared Constants
-* Utility Helpers
+* ✅ MongoDB Atlas Setup
+* ✅ Environment Variables Setup
+* ✅ Category Module
+* ✅ Product Module
+* ✅ Authentication & Authorization
+* ✅ Shopping Cart Module
+* ✅ Order Management Backend
+* ✅ Shared Constants
+* ✅ Utility Helpers
+* ✅ Order & Payment Status Workflow Validation
 
 ---
 
 ## Pending
 
-* Order Management
 * Razorpay Integration
 * Cloudinary Integration
+* Customer Dashboard UI
+* Admin Dashboard UI
 * Frontend Deployment
 * Backend Deployment
 * Production Domain Setup
 * SSL Configuration
+* Logging & Monitoring
 * Performance Optimization
+* API Rate Limiting
+* Backup & Recovery Strategy

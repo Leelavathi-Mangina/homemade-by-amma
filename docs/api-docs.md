@@ -8,11 +8,11 @@ http://localhost:5000/api
 
 ---
 
-## Health Check
+# Health Check
 
-### GET /health
+## GET /health
 
-Response
+### Response
 
 ```json
 {
@@ -29,7 +29,7 @@ Response
 
 ### POST /categories
 
-Request Body
+#### Request Body
 
 ```json
 {
@@ -39,7 +39,7 @@ Request Body
 }
 ```
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -54,7 +54,7 @@ Success Response
 
 ### GET /categories
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -71,7 +71,7 @@ Success Response
 
 ### POST /products
 
-Request Body
+#### Request Body
 
 ```json
 {
@@ -84,7 +84,7 @@ Request Body
 }
 ```
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -99,7 +99,7 @@ Success Response
 
 ### GET /products
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -112,10 +112,10 @@ Success Response
 
 # Product Validation
 
-Implemented validations:
+Implemented:
 
 * Required field validation
-* Duplicate productId validation
+* Duplicate Product ID validation
 * Duplicate slug validation
 * Category existence validation
 
@@ -127,7 +127,7 @@ Implemented validations:
 
 ### POST /auth/register
 
-Request Body
+#### Request Body
 
 ```json
 {
@@ -138,7 +138,7 @@ Request Body
 }
 ```
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -153,7 +153,7 @@ Success Response
 
 ### POST /auth/login
 
-Request Body
+#### Request Body
 
 ```json
 {
@@ -162,7 +162,7 @@ Request Body
 }
 ```
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -181,7 +181,7 @@ Success Response
 
 Authentication Required
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -202,7 +202,7 @@ Authentication Required
 
 Admin Role Required
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -211,20 +211,11 @@ Success Response
 }
 ```
 
-Failure Response
-
-```json
-{
-  "success": false,
-  "message": "Access denied. Admin only."
-}
-```
-
 ---
 
 # Cart
 
-All cart APIs require user authentication.
+All Cart APIs require user authentication.
 
 ## Add Product to Cart
 
@@ -232,7 +223,7 @@ All cart APIs require user authentication.
 
 Authentication Required
 
-Request Body
+#### Request Body
 
 ```json
 {
@@ -241,7 +232,7 @@ Request Body
 }
 ```
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -258,7 +249,7 @@ Success Response
 
 Authentication Required
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -275,7 +266,7 @@ Success Response
 
 Authentication Required
 
-Request Body
+#### Request Body
 
 ```json
 {
@@ -284,7 +275,7 @@ Request Body
 }
 ```
 
-Success Response
+#### Success Response
 
 ```json
 {
@@ -301,13 +292,7 @@ Success Response
 
 Authentication Required
 
-Example
-
-```text
-DELETE /cart/remove/6a2824bdfdd5a4914af63683
-```
-
-Success Response
+#### Success Response
 
 ```json
 {
@@ -324,12 +309,172 @@ Success Response
 
 Authentication Required
 
-Success Response
+#### Success Response
 
 ```json
 {
   "success": true,
   "message": "Cart cleared successfully"
+}
+```
+
+---
+
+# Orders
+
+All Order APIs require user authentication unless specified as Admin only.
+
+## Place Order
+
+### POST /orders
+
+Authentication Required
+
+#### Request Body
+
+```json
+{
+  "deliveryAddress": {
+    "fullName": "Leelavathi",
+    "houseNo": "12-34",
+    "street": "College Road",
+    "villageOrCity": "Tekkali",
+    "district": "Srikakulam",
+    "state": "Andhra Pradesh",
+    "pincode": "532201",
+    "landmark": "Near AITAM College"
+  },
+  "phone": "9876543210",
+  "orderNotes": "Please prepare fresh laddus.",
+  "preferredDeliveryDate": "2026-06-20"
+}
+```
+
+#### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Order placed successfully"
+}
+```
+
+---
+
+## Get My Orders
+
+### GET /orders/my-orders
+
+Authentication Required
+
+#### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Orders fetched successfully"
+}
+```
+
+---
+
+## Get My Single Order
+
+### GET /orders/:orderId
+
+Authentication Required
+
+#### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Order fetched successfully"
+}
+```
+
+---
+
+# Admin Order Management
+
+All endpoints below require:
+
+* Authentication
+* Admin Role
+
+---
+
+## Get All Orders
+
+### GET /orders
+
+#### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Orders fetched successfully"
+}
+```
+
+---
+
+## Get Single Order
+
+### GET /orders/admin/:orderId
+
+#### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Order fetched successfully"
+}
+```
+
+---
+
+## Update Order Status
+
+### PATCH /orders/admin/:orderId/status
+
+#### Request Body
+
+```json
+{
+  "status": "Confirmed"
+}
+```
+
+#### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Order status updated successfully"
+}
+```
+
+---
+
+## Update Payment Status
+
+### PATCH /orders/admin/:orderId/payment-status
+
+#### Request Body
+
+```json
+{
+  "paymentStatus": "Paid"
+}
+```
+
+#### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Payment status updated successfully"
 }
 ```
 
@@ -351,6 +496,27 @@ Implemented:
 
 ---
 
+# Order Features
+
+Implemented:
+
+* Place order from cart
+* Automatic Order ID generation
+* Customer order history
+* Customer single order details
+* Admin order listing
+* Admin single order details
+* Update order status
+* Update payment status
+* Order status workflow validation
+* Payment status workflow validation
+* Delivery address support
+* Preferred delivery date
+* Order notes
+* Admin-only order management
+
+---
+
 # Authentication & Security
 
 Implemented:
@@ -362,4 +528,5 @@ Implemented:
 * Role-based authorization
 * Admin access control
 * Secure user-specific cart operations
-* Protected cart APIs using authentication middleware
+* Secure order ownership validation
+* Protected admin order APIs

@@ -62,7 +62,7 @@ server
 * paymentStatus.js
 * apiMessages.js
 
-Purpose:
+### Purpose
 
 * Centralized user roles
 * Order status management
@@ -76,12 +76,16 @@ Purpose:
 * generateOrderId.js
 * ApiResponse.js
 * asyncHandler.js
+* orderStatusTransition.js
+* paymentStatusTransition.js
 
-Purpose:
+### Purpose
 
 * Generate unique business order IDs
 * Standardize API responses
 * Handle asynchronous errors
+* Validate order status workflow
+* Validate payment status workflow
 
 ---
 
@@ -128,7 +132,7 @@ Purpose:
 * password
 * role
 
-Roles:
+### Roles
 
 * customer
 * admin
@@ -145,7 +149,7 @@ Roles:
 * quantity
 * expiresAt
 
-Features:
+### Features
 
 * User-specific shopping cart
 * Add products
@@ -157,6 +161,37 @@ Features:
 
 ---
 
+## Order Module
+
+### Order
+
+* orderId
+* user
+* items
+* deliveryAddress
+* phone
+* orderNotes
+* preferredDeliveryDate
+* totalAmount
+* status
+* paymentStatus
+* createdAt
+
+### Features
+
+* Place order
+* Auto-generated Order IDs
+* Customer order history
+* Customer single order details
+* Admin order listing
+* Admin single order details
+* Order status updates
+* Payment status updates
+* Order status workflow validation
+* Payment status workflow validation
+
+---
+
 # Database Collections
 
 ```text
@@ -164,6 +199,7 @@ users
 categories
 products
 carts
+orders
 ```
 
 ---
@@ -190,6 +226,21 @@ Product (1)
       │
       ▼
 Cart Items (Many)
+
+User (1)
+      │
+      ▼
+Orders (Many)
+
+Order (1)
+      │
+      ▼
+Order Items (Many)
+
+Product (1)
+      │
+      ▼
+Order Items (Many)
 ```
 
 ---
@@ -264,6 +315,67 @@ Clear Cart
 
 ---
 
+# Order Flow
+
+```text
+User Login
+      ↓
+Authenticate User
+      ↓
+View Cart
+      ↓
+Place Order
+      ↓
+Generate Order ID
+      ↓
+Save Order
+      ↓
+Clear Cart
+      ↓
+Customer Views Orders
+      ↓
+Admin Manages Orders
+      ↓
+Update Order Status
+      ↓
+Update Payment Status
+```
+
+---
+
+# Order Status Workflow
+
+```text
+Pending
+    ↓
+Confirmed
+    ↓
+Preparing
+    ↓
+Ready for Delivery
+    ↓
+Out for Delivery
+    ↓
+Delivered
+```
+
+Cancelled orders can occur before delivery according to business rules.
+
+---
+
+# Payment Status Workflow
+
+```text
+Pending
+   ├──► Paid
+   └──► Failed
+
+Paid
+   └──► Refunded
+```
+
+---
+
 # Security Features
 
 * Password Hashing (bcrypt)
@@ -273,6 +385,10 @@ Clear Cart
 * Role-Based Authorization
 * Admin Access Control
 * User-specific cart protection
+* User-specific order protection
+* Order ownership verification
+* Order status transition validation
+* Payment status transition validation
 
 ---
 
@@ -284,26 +400,32 @@ Clear Cart
 * ✅ Phase 4 – Product Validation
 * ✅ Phase 5 – Authentication & Authorization
 * ✅ Phase 6 – Shopping Cart Module
+* ✅ Phase 7 – Order Management Backend
 
 ---
 
 # Upcoming Modules
 
-## Phase 7
-
-* Order Management
-* Customer Order History
-* Order Status Tracking
-* Admin Order Management
-
 ## Phase 8
 
 * Razorpay Payment Integration
+* Payment Verification
+* Webhooks
+
+---
 
 ## Phase 9
 
 * Admin Dashboard
+* Customer Dashboard
+* Order Management UI
+* Product Management UI
+
+---
 
 ## Phase 10
 
-* Deployment & Production Setup
+* Deployment
+* Production Configuration
+* Security Hardening
+* Performance Optimization
