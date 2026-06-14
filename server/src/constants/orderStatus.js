@@ -3,6 +3,7 @@ const ORDER_STATUS = {
   CONFIRMED: "Confirmed",
   PREPARING: "Preparing",
   READY: "Ready for Delivery",
+  OUT_FOR_DELIVERY: "Out for Delivery",
   DELIVERED: "Delivered",
   CANCELLED: "Cancelled",
 };

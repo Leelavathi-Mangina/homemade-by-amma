@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 
+const ROLES = require("../constants/roles");
+
 const ApiResponse = require("../utils/ApiResponse");
 
 const asyncHandler = require("../utils/asyncHandler");
@@ -49,7 +51,7 @@ const adminOnly = (
   res,
   next
 ) => {
-  if (req.user.role !== "admin") {
+  if (req.user.role !== ROLES.ADMIN) {
     return res.status(403).json(
       new ApiResponse(
         false,
@@ -67,3 +69,4 @@ module.exports = {
   protect,
   adminOnly,
 };
+
