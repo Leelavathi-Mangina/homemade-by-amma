@@ -29,6 +29,10 @@ http://localhost:5000/api
 
 ### POST /categories
 
+Authentication Required
+
+Admin Role Required
+
 #### Request Body
 
 ```json
@@ -70,6 +74,10 @@ http://localhost:5000/api
 ## Create Product
 
 ### POST /products
+
+Authentication Required
+
+Admin Role Required
 
 #### Request Body
 
@@ -480,6 +488,80 @@ All endpoints below require:
 
 ---
 
+# Payments
+
+All Payment APIs require user authentication.
+
+---
+
+## Create Razorpay Order
+
+### POST /payments/create-order
+
+Authentication Required
+
+#### Request Body
+
+```json
+{
+  "orderId": "ORD-000005"
+}
+```
+
+#### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Razorpay order created successfully",
+  "data": {
+    "orderId": "ORD-000005",
+    "razorpayOrderId": "order_xxxxxxxxx",
+    "amount": 135000,
+    "currency": "INR"
+  }
+}
+```
+
+If an unexpired Razorpay order already exists:
+
+```json
+{
+  "success": true,
+  "message": "Existing Razorpay order found"
+}
+```
+
+---
+
+## Verify Razorpay Payment
+
+### POST /payments/verify
+
+Authentication Required
+
+#### Request Body
+
+```json
+{
+  "orderId": "ORD-000005",
+  "razorpayOrderId": "order_xxxxxxxxx",
+  "razorpayPaymentId": "pay_xxxxxxxxx",
+  "razorpaySignature": "generated_signature"
+}
+```
+
+#### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Payment verified successfully"
+}
+```
+
+---
+
 # Cart Features
 
 Implemented:
@@ -517,6 +599,24 @@ Implemented:
 
 ---
 
+# Payment Features
+
+Implemented:
+
+* Razorpay order creation
+* Razorpay payment verification
+* HMAC SHA-256 signature verification
+* Duplicate Razorpay order prevention
+* Expiry-based Razorpay order regeneration
+* Configurable Razorpay order expiry time
+* Payment status update after successful verification
+* Razorpay Order ID storage
+* Razorpay Payment ID storage
+* Razorpay Signature storage
+* JWT-protected payment APIs
+
+---
+
 # Authentication & Security
 
 Implemented:
@@ -530,3 +630,5 @@ Implemented:
 * Secure user-specific cart operations
 * Secure order ownership validation
 * Protected admin order APIs
+* Secure Razorpay payment verification
+* HMAC SHA-256 signature validation

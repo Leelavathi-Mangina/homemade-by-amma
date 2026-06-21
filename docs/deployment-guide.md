@@ -17,13 +17,13 @@
 
 * MongoDB Atlas
 
+### Payments
+
+* Razorpay
+
 ### Image Storage (Future)
 
 * Cloudinary
-
-### Payments (Future)
-
-* Razorpay
 
 ---
 
@@ -31,12 +31,16 @@
 
 ## Backend (.env)
 
-```env id="44u9g2"
+```env
 PORT=5000
 
 MONGODB_URI=your_mongodb_connection_string
 
 JWT_SECRET=your_jwt_secret
+
+RAZORPAY_KEY_ID=your_razorpay_key_id
+
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 ```
 
 ---
@@ -45,7 +49,7 @@ JWT_SECRET=your_jwt_secret
 
 ## Frontend
 
-```bash id="rfqf5l"
+```bash
 cd client
 npm install
 npm run dev
@@ -53,7 +57,7 @@ npm run dev
 
 Runs on:
 
-```text id="hr0jtk"
+```text
 http://localhost:3000
 ```
 
@@ -61,7 +65,7 @@ http://localhost:3000
 
 ## Backend
 
-```bash id="24clrz"
+```bash
 cd server
 npm install
 npm run dev
@@ -69,7 +73,7 @@ npm run dev
 
 Runs on:
 
-```text id="ydcr89"
+```text
 http://localhost:5000
 ```
 
@@ -91,7 +95,7 @@ Current Collections:
 
 ### Connection Flow
 
-```text id="pxo94z"
+```text
 Application
      ↓
 MongoDB Connection String
@@ -105,11 +109,17 @@ Database Collections
 
 # Backend Architecture
 
+## Configuration
+
+* db.js
+* razorpay.js
+
 ## Constants
 
 * roles.js
 * orderStatus.js
 * paymentStatus.js
+* payment.js
 * apiMessages.js
 
 ## Utilities
@@ -149,7 +159,7 @@ Security Features:
 
 ### Authentication Flow
 
-```text id="nr4miv"
+```text
 Register
    ↓
 Hash Password
@@ -202,6 +212,42 @@ Implemented:
 
 ---
 
+# Payment Features
+
+Implemented:
+
+* Razorpay order creation
+* Razorpay payment verification
+* HMAC SHA-256 signature verification
+* Duplicate Razorpay order prevention
+* Expiry-based Razorpay order regeneration
+* Configurable Razorpay order expiry
+* Secure environment variable configuration
+* JWT-protected payment APIs
+
+### Payment Flow
+
+```text
+Customer Places Order
+        │
+        ▼
+Create Business Order
+        │
+        ▼
+Create Razorpay Order
+        │
+        ▼
+Customer Completes Payment
+        │
+        ▼
+Verify Razorpay Signature
+        │
+        ▼
+Update Payment Status
+```
+
+---
+
 # Planned Production Deployment
 
 ## Frontend Deployment
@@ -215,6 +261,7 @@ Responsibilities:
 * Host Next.js application
 * SEO optimization
 * Static asset delivery
+* Razorpay Checkout Integration
 
 ---
 
@@ -231,6 +278,8 @@ Responsibilities:
 * Business logic
 * Cart management
 * Order management
+* Razorpay integration
+* Payment verification
 * Database communication
 
 ---
@@ -263,22 +312,11 @@ Used for:
 
 ---
 
-## Razorpay
-
-Used for:
-
-* Online payments
-* Payment verification
-* Secure transactions
-* Payment webhooks
-
----
-
 ## Custom Domain
 
 Example:
 
-```text id="w2o3ua"
+```text
 www.homemadebyamma.com
 ```
 
@@ -295,6 +333,10 @@ www.homemadebyamma.com
 * ✅ Authentication & Authorization
 * ✅ Shopping Cart Module
 * ✅ Order Management Backend
+* ✅ Razorpay Integration
+* ✅ Payment Verification
+* ✅ Duplicate Razorpay Order Prevention
+* ✅ Expiry-based Razorpay Order Regeneration
 * ✅ Shared Constants
 * ✅ Utility Helpers
 * ✅ Order & Payment Status Workflow Validation
@@ -303,10 +345,10 @@ www.homemadebyamma.com
 
 ## Pending
 
-* Razorpay Integration
 * Cloudinary Integration
 * Customer Dashboard UI
 * Admin Dashboard UI
+* Razorpay Checkout (Frontend)
 * Frontend Deployment
 * Backend Deployment
 * Production Domain Setup
@@ -315,6 +357,3 @@ www.homemadebyamma.com
 * Performance Optimization
 * API Rate Limiting
 * Backup & Recovery Strategy
-
-
-   

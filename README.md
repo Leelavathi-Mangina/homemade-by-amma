@@ -50,7 +50,7 @@ Products are prepared only after order confirmation to ensure freshness and qual
 * HTTP-Only Cookies
 * bcrypt Password Hashing
 
-## Payments (Upcoming)
+## Payments
 
 * Razorpay
 
@@ -170,6 +170,45 @@ Products are prepared only after order confirmation to ensure freshness and qual
 
 ---
 
+## Phase 8 – Payment Integration
+
+### Razorpay Integration
+
+* Razorpay Account Setup
+* Test Mode Integration
+* Secure Environment Variable Configuration
+
+### Payment APIs
+
+* Create Razorpay Order API
+* Verify Razorpay Payment API
+
+### Payment Security
+
+* HMAC SHA-256 Signature Verification
+* Secure Payment Verification Flow
+* JWT-Protected Payment Endpoints
+
+### Business Logic
+
+* Razorpay Order Creation
+* Duplicate Razorpay Order Prevention
+* Expiry-Based Razorpay Order Regeneration
+* Configurable Razorpay Order Expiry Time
+* Payment Status Update
+* Razorpay Order ID Storage
+* Razorpay Payment ID Storage
+* Razorpay Signature Storage
+
+### Production Improvements
+
+* Centralized Payment Configuration
+* Reusable Razorpay Orders (within expiry window)
+* Automatic Razorpay Order Regeneration (after expiry)
+* Production-ready payment workflow
+
+---
+
 ## Architecture Improvements
 
 ### Shared Constants
@@ -177,6 +216,7 @@ Products are prepared only after order confirmation to ensure freshness and qual
 * Roles
 * Order Status
 * Payment Status
+* Payment Configuration
 * API Messages
 
 ### Utility Helpers
@@ -191,6 +231,7 @@ Products are prepared only after order confirmation to ensure freshness and qual
 * Cleaner controller logic
 * Scalable folder structure
 * Consistent API responses
+* Secure payment architecture
 
 ---
 
@@ -203,6 +244,7 @@ homemade-by-amma/
 │
 ├── server/
 │   ├── src/
+│   │   ├── config/
 │   │   ├── constants/
 │   │   ├── controllers/
 │   │   ├── middleware/
@@ -230,14 +272,6 @@ homemade-by-amma/
 
 # Upcoming Features
 
-## Phase 8 – Payment Integration
-
-* Razorpay Integration
-* Online Payments
-* Payment Verification
-
----
-
 ## Phase 9 – Admin Dashboard
 
 * Dashboard UI
@@ -258,7 +292,7 @@ homemade-by-amma/
 # Future Enhancements
 
 * Cloudinary Image Upload
-* SEO Optimization
+* Customer Address Management
 * Delivery Management
 * Order Tracking
 * WhatsApp Notifications
@@ -267,6 +301,7 @@ homemade-by-amma/
 * Coupons & Discounts
 * Inventory Management
 * Analytics Dashboard
+* SEO Optimization
 
 ---
 

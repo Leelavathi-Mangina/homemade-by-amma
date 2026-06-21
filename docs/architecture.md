@@ -3,13 +3,16 @@
 ## Current Architecture
 
 ```text
-Frontend (Next.js)
-        │
-        ▼
-Backend (Express.js REST APIs)
-        │
-        ▼
-MongoDB Atlas
+                    Frontend (Next.js)
+                           │
+                           ▼
+                Backend (Express.js REST APIs)
+                 │            │
+                 │            ▼
+                 │      Razorpay Payment Gateway
+                 │
+                 ▼
+             MongoDB Atlas
 ```
 
 ---
@@ -22,6 +25,8 @@ server.js
 Load .env
     ↓
 Connect MongoDB
+    ↓
+Initialize Razorpay
     ↓
 Start Express
     ↓
@@ -40,6 +45,9 @@ Serve APIs
 server
 │
 ├── config
+│   ├── db.js
+│   └── razorpay.js
+│
 ├── constants
 ├── controllers
 ├── middleware
@@ -60,6 +68,7 @@ server
 * roles.js
 * orderStatus.js
 * paymentStatus.js
+* payment.js
 * apiMessages.js
 
 ### Purpose
@@ -67,6 +76,7 @@ server
 * Centralized user roles
 * Order status management
 * Payment status management
+* Payment configuration
 * Consistent API response messages
 
 ---
@@ -175,6 +185,10 @@ server
 * totalAmount
 * status
 * paymentStatus
+* razorpayOrderId
+* razorpayOrderCreatedAt
+* razorpayPaymentId
+* razorpaySignature
 * createdAt
 
 ### Features
@@ -187,6 +201,10 @@ server
 * Admin single order details
 * Order status updates
 * Payment status updates
+* Razorpay integration
+* Duplicate Razorpay order prevention
+* Expiry-based Razorpay order regeneration
+* Secure payment verification
 * Order status workflow validation
 * Payment status workflow validation
 
@@ -343,6 +361,63 @@ Update Payment Status
 
 ---
 
+# Payment Flow
+
+```text
+Customer Places Order
+          │
+          ▼
+Create Business Order
+          │
+          ▼
+Create Razorpay Order
+          │
+          ▼
+Store Razorpay Order ID
+          │
+          ▼
+Customer Completes Payment
+          │
+          ▼
+Verify Razorpay Signature
+          │
+          ▼
+Update Payment Status
+          │
+          ▼
+Order Ready For Processing
+```
+
+---
+
+# Razorpay Order Reuse Flow
+
+```text
+Customer Clicks Pay
+        │
+        ▼
+Existing Razorpay Order?
+        │
+   No ─────────► Create New Razorpay Order
+        │
+       Yes
+        │
+        ▼
+Check Expiry Time
+        │
+  < Expiry Time ?
+     │
+ ┌───┴────┐
+ │        │
+Yes       No
+ │         │
+ ▼         ▼
+Reuse    Create New
+Existing Razorpay Order
+```
+
+---
+
 # Order Status Workflow
 
 ```text
@@ -389,6 +464,10 @@ Paid
 * Order ownership verification
 * Order status transition validation
 * Payment status transition validation
+* Razorpay HMAC SHA-256 signature verification
+* Duplicate Razorpay order prevention
+* Configurable Razorpay order expiry
+* Secure environment variable configuration
 
 ---
 
@@ -401,23 +480,19 @@ Paid
 * ✅ Phase 5 – Authentication & Authorization
 * ✅ Phase 6 – Shopping Cart Module
 * ✅ Phase 7 – Order Management Backend
+* ✅ Phase 8 – Razorpay Payment Integration
 
 ---
 
 # Upcoming Modules
 
-## Phase 8
-
-* Razorpay Payment Integration
-* Payment Verification
-* Webhooks
-
----
-
 ## Phase 9
 
+* Customer UI
 * Admin Dashboard
-* Customer Dashboard
+* Shopping Cart UI
+* Checkout Flow
+* Razorpay Checkout Integration
 * Order Management UI
 * Product Management UI
 
@@ -425,7 +500,11 @@ Paid
 
 ## Phase 10
 
-* Deployment
+* Backend Deployment
+* Frontend Deployment
 * Production Configuration
 * Security Hardening
 * Performance Optimization
+* Cloudinary Integration
+
+
