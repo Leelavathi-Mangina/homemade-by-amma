@@ -7,6 +7,8 @@ const razorpay = require("../config/razorpay");
 
 const PAYMENT_STATUS = require("../constants/paymentStatus");
 
+const PAYMENT = require("../constants/payment");
+
 const crypto = require("crypto");
 
 const createRazorpayOrder = asyncHandler(async (req, res) => {
@@ -28,6 +30,22 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
       .json(new ApiResponse(false, "Order is already paid"));
   }
 
+  if (order.razorpayOrderId && order.razorpayOrderCreatedAt) {
+    const orderAge =
+      Date.now() - new Date(order.razorpayOrderCreatedAt).getTime();
+
+    if (orderAge < PAYMENT.RAZORPAY_ORDER_EXPIRY_TIME_MS) {
+      return res.status(200).json(
+        new ApiResponse(true, "Existing Razorpay order found", {
+          orderId: order.orderId,
+          razorpayOrderId: order.razorpayOrderId,
+          amount: order.totalAmount * 100,
+          currency: "INR",
+        }),
+      );
+    }
+  }
+
   const options = {
     amount: order.totalAmount * 100,
     currency: "INR",
@@ -43,6 +61,8 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
   }
 
   order.razorpayOrderId = razorpayOrder.id;
+
+  order.razorpayOrderCreatedAt = new Date();
 
   await order.save();
 
