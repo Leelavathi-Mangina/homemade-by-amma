@@ -1,19 +1,9 @@
-import Navbar from "../components/layout/Navbar";
+import Hero from "../components/home/Hero";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <>
-      <Navbar />
-
-      <main className="mx-auto max-w-7xl p-6">
-        <h1 className="mt-20 text-5xl font-bold">
-          Welcome to Homemade by Amma
-        </h1>
-
-        <p className="mt-4 text-gray-600">
-          Fresh homemade food for every celebration.
-        </p>
-      </main>
-    </>
+    <main>
+      <Hero />
+    </main>
   );
 }
