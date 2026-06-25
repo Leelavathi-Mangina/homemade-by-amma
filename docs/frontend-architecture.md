@@ -20,7 +20,9 @@ components/
 │   ├── CategoriesPreview.jsx
 │   ├── CategoryCard.jsx
 │   ├── FeaturedProducts.jsx
-│   └── ProductCard.jsx
+│   ├── ProductCard.jsx
+│   ├── WhyChooseUs.jsx
+│   └── FeatureCard.jsx
 ├── layout/
 │   ├── Navbar.jsx
 │   ├── DesktopNav.jsx
@@ -33,7 +35,8 @@ components/
 constants/
 ├── navigation.js
 ├── categories.js
-└── products.js
+├── products.js
+└── features.js
 ```
 
 ---
@@ -80,8 +83,10 @@ HomePage
 ├── Hero
 ├── CategoriesPreview
 │   └── CategoryCard
-└── FeaturedProducts
-    └── ProductCard
+├── FeaturedProducts
+│   └── ProductCard
+└── WhyChooseUs
+    └── FeatureCard
 ```
 
 ---
@@ -132,6 +137,20 @@ HomePage
 
 ---
 
+## Why Choose Us Section
+
+### Features Implemented
+
+* Responsive feature grid
+* Reusable `FeatureCard` component
+* Data-driven rendering using `.map()`
+* Centralized feature data in `constants/features.js`
+* Trust-focused business highlights
+* Premium hover animations
+* Mobile-first responsive layout
+
+---
+
 ## Current Theme
 
 * Background
@@ -149,6 +168,7 @@ HomePage
 * Mobile Navigation
 * CategoryCard
 * ProductCard
+* FeatureCard
 
 ---
 
@@ -170,6 +190,14 @@ FeaturedProducts
         │
         ▼
 ProductCard
+
+WHY_CHOOSE_US
+        │
+        ▼
+WhyChooseUs
+        │
+        ▼
+FeatureCard
 ```
 
 This structure will later be replaced with backend API data without changing the UI components.
@@ -191,6 +219,8 @@ This structure will later be replaced with backend API data without changing the
 * ✔ Reusable CategoryCard Component
 * ✔ Featured Products Section
 * ✔ Reusable ProductCard Component
+* ✔ Why Choose Us Section
+* ✔ Reusable FeatureCard Component
 * ✔ Data-driven UI Rendering
 
 ---
@@ -219,11 +249,15 @@ This structure will later be replaced with backend API data without changing the
 * ✔ Featured Products Section
 * ✔ Reusable ProductCard Component
 
+### Milestone 5
+
+* ✔ Why Choose Us Section
+* ✔ Reusable FeatureCard Component
+
 ---
 
 ## Next Milestone
 
-* Why Choose Us Section
 * Testimonials Section
 * Footer
 * Hero section with real product images
