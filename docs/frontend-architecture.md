@@ -22,7 +22,9 @@ components/
 │   ├── FeaturedProducts.jsx
 │   ├── ProductCard.jsx
 │   ├── WhyChooseUs.jsx
-│   └── FeatureCard.jsx
+│   ├── FeatureCard.jsx
+│   ├── Testimonials.jsx
+│   └── TestimonialCard.jsx
 ├── layout/
 │   ├── Navbar.jsx
 │   ├── DesktopNav.jsx
@@ -36,7 +38,8 @@ constants/
 ├── navigation.js
 ├── categories.js
 ├── products.js
-└── features.js
+├── features.js
+└── testimonials.js
 ```
 
 ---
@@ -85,8 +88,10 @@ HomePage
 │   └── CategoryCard
 ├── FeaturedProducts
 │   └── ProductCard
-└── WhyChooseUs
-    └── FeatureCard
+├── WhyChooseUs
+│   └── FeatureCard
+└── Testimonials
+    └── TestimonialCard
 ```
 
 ---
@@ -151,6 +156,21 @@ HomePage
 
 ---
 
+## Testimonials Section
+
+### Features Implemented
+
+* Responsive testimonial grid
+* Reusable `TestimonialCard` component
+* Data-driven rendering using `.map()`
+* Centralized testimonial data in `constants/testimonials.js`
+* Customer reviews with decorative quotation styling
+* Five-star rating display
+* Premium hover animations
+* Mobile-first responsive layout
+
+---
+
 ## Current Theme
 
 * Background
@@ -169,6 +189,7 @@ HomePage
 * CategoryCard
 * ProductCard
 * FeatureCard
+* TestimonialCard
 
 ---
 
@@ -198,6 +219,14 @@ WhyChooseUs
         │
         ▼
 FeatureCard
+
+TESTIMONIALS
+        │
+        ▼
+Testimonials
+        │
+        ▼
+TestimonialCard
 ```
 
 This structure will later be replaced with backend API data without changing the UI components.
@@ -221,6 +250,8 @@ This structure will later be replaced with backend API data without changing the
 * ✔ Reusable ProductCard Component
 * ✔ Why Choose Us Section
 * ✔ Reusable FeatureCard Component
+* ✔ Testimonials Section
+* ✔ Reusable TestimonialCard Component
 * ✔ Data-driven UI Rendering
 
 ---
@@ -254,11 +285,15 @@ This structure will later be replaced with backend API data without changing the
 * ✔ Why Choose Us Section
 * ✔ Reusable FeatureCard Component
 
+### Milestone 6
+
+* ✔ Testimonials Section
+* ✔ Reusable TestimonialCard Component
+
 ---
 
 ## Next Milestone
 
-* Testimonials Section
 * Footer
 * Hero section with real product images
 * Product listing page
