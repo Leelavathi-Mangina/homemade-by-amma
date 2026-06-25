@@ -16,7 +16,9 @@ src/
 components/
 ├── common/
 ├── home/
-│   └── Hero.jsx
+│   ├── Hero.jsx
+│   ├── CategoriesPreview.jsx
+│   └── CategoryCard.jsx
 ├── layout/
 │   ├── Navbar.jsx
 │   ├── DesktopNav.jsx
@@ -27,6 +29,8 @@ components/
     └── Button.jsx
 
 constants/
+├── navigation.js
+└── categories.js
 ```
 
 ---
@@ -43,7 +47,7 @@ constants/
 
 ## Shared Layout
 
-```
+```text
 RootLayout
 ├── Navbar
 ├── Main
@@ -55,13 +59,27 @@ RootLayout
 
 ## Component Hierarchy
 
-```
+### Navbar
+
+```text
 Navbar
 ├── Logo
 ├── DesktopNav
 ├── NavbarActions
 ├── MobileMenuButton
 └── MobileMenu
+```
+
+### Homepage
+
+```text
+HomePage
+├── Hero
+└── CategoriesPreview
+    ├── CategoryCard
+    ├── CategoryCard
+    ├── CategoryCard
+    └── CategoryCard
 ```
 
 ---
@@ -71,7 +89,7 @@ Navbar
 ### Features Implemented
 
 * Responsive two-column layout
-* Brand label
+* Brand badge
 * Main heading
 * Business description
 * Trust indicators
@@ -81,11 +99,52 @@ Navbar
 
 ---
 
+## Categories Preview Section
+
+### Features Implemented
+
+* Responsive category grid
+* Reusable `CategoryCard` component
+* Data-driven rendering using `.map()`
+* Centralized category data in `constants/categories.js`
+* Hover animations
+* Premium card design
+* Mobile-first responsive layout
+
+---
+
 ## Current Theme
 
 * Background
-* Typography
+* Typography (Poppins)
 * Primary Color
+* Warm food-inspired color palette
+
+---
+
+## Reusable Components
+
+* Button
+* Navbar
+* Desktop Navigation
+* Mobile Navigation
+* CategoryCard
+
+---
+
+## Data Architecture
+
+```text
+HOME_CATEGORIES
+        │
+        ▼
+CategoriesPreview
+        │
+        ▼
+CategoryCard (Reusable)
+```
+
+This structure will later be replaced with backend API data without changing the UI components.
 
 ---
 
@@ -100,12 +159,16 @@ Navbar
 * ✔ Shared Root Layout
 * ✔ Hero Section
 * ✔ Reusable Button Component
+* ✔ Categories Preview Section
+* ✔ Reusable CategoryCard Component
+* ✔ Data-driven UI Rendering
 
 ---
 
 ## Next Milestone
 
-* Categories Preview Section
+* Featured Products Section
 * Footer
-* Hero Section polish with real product images
+* Hero section with real product images
 * Product listing page
+* Backend integration for categories and products
