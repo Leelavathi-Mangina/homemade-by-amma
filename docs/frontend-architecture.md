@@ -30,7 +30,10 @@ components/
 │   ├── DesktopNav.jsx
 │   ├── MobileMenu.jsx
 │   ├── MobileMenuButton.jsx
-│   └── NavbarActions.jsx
+│   ├── NavbarActions.jsx
+│   ├── Footer.jsx
+│   ├── FooterLinks.jsx
+│   └── FooterContact.jsx
 └── ui/
     └── Button.jsx
 
@@ -44,7 +47,7 @@ constants/
 
 ---
 
-## Routing
+# Routing
 
 * /
 * /about
@@ -54,21 +57,21 @@ constants/
 
 ---
 
-## Shared Layout
+# Shared Layout
 
 ```text
 RootLayout
 ├── Navbar
 ├── Main
 │   └── Current Page
-└── (Footer - Planned)
+└── Footer
 ```
 
 ---
 
-## Component Hierarchy
+# Component Hierarchy
 
-### Navbar
+## Navbar
 
 ```text
 Navbar
@@ -79,7 +82,7 @@ Navbar
 └── MobileMenu
 ```
 
-### Homepage
+## Homepage
 
 ```text
 HomePage
@@ -94,11 +97,19 @@ HomePage
     └── TestimonialCard
 ```
 
+## Footer
+
+```text
+Footer
+├── FooterLinks
+└── FooterContact
+```
+
 ---
 
-## Hero Section
+# Hero Section
 
-### Features Implemented
+## Features Implemented
 
 * Responsive two-column layout
 * Brand badge
@@ -111,29 +122,28 @@ HomePage
 
 ---
 
-## Categories Preview Section
+# Categories Preview Section
 
-### Features Implemented
+## Features Implemented
 
 * Responsive category grid
-* Reusable `CategoryCard` component
+* Reusable `CategoryCard`
 * Data-driven rendering using `.map()`
-* Centralized category data in `constants/categories.js`
-* Hover animations
-* Premium card design
+* Centralized category data
+* Premium hover animations
 * Mobile-first responsive layout
 
 ---
 
-## Featured Products Section
+# Featured Products Section
 
-### Features Implemented
+## Features Implemented
 
 * Responsive product grid
-* Reusable `ProductCard` component
-* Data-driven rendering using `.map()`
-* Centralized featured products data in `constants/products.js`
-* Product category badge
+* Reusable `ProductCard`
+* Data-driven rendering
+* Centralized product data
+* Category badge
 * Product pricing
 * Reusable CTA button
 * View All Products button
@@ -142,50 +152,69 @@ HomePage
 
 ---
 
-## Why Choose Us Section
+# Why Choose Us Section
 
-### Features Implemented
+## Features Implemented
 
 * Responsive feature grid
-* Reusable `FeatureCard` component
-* Data-driven rendering using `.map()`
-* Centralized feature data in `constants/features.js`
+* Reusable `FeatureCard`
+* Data-driven rendering
+* Centralized feature data
 * Trust-focused business highlights
 * Premium hover animations
 * Mobile-first responsive layout
 
 ---
 
-## Testimonials Section
+# Testimonials Section
 
-### Features Implemented
+## Features Implemented
 
 * Responsive testimonial grid
-* Reusable `TestimonialCard` component
-* Data-driven rendering using `.map()`
-* Centralized testimonial data in `constants/testimonials.js`
-* Customer reviews with decorative quotation styling
-* Five-star rating display
+* Reusable `TestimonialCard`
+* Data-driven rendering
+* Centralized testimonial data
+* Five-star ratings
+* Decorative quotation styling
 * Premium hover animations
 * Mobile-first responsive layout
 
 ---
 
-## Current Theme
+# Footer
 
-* Background
-* Typography (Poppins)
-* Primary Color
-* Warm food-inspired color palette
+## Features Implemented
+
+* Three-column responsive layout
+* Brand information
+* Quick navigation links
+* Contact information
+* Copyright section
+* Shared layout integration
+* Mobile-first responsive design
 
 ---
 
-## Reusable Components
+# Current Theme
+
+* Poppins Typography
+* Warm food-inspired color palette
+* Amber primary color
+* Soft rounded corners
+* Consistent spacing system
+* Responsive layout
+
+---
+
+# Reusable Components
 
 * Button
 * Navbar
 * Desktop Navigation
 * Mobile Navigation
+* Footer
+* FooterLinks
+* FooterContact
 * CategoryCard
 * ProductCard
 * FeatureCard
@@ -193,7 +222,7 @@ HomePage
 
 ---
 
-## Data Architecture
+# Data Architecture
 
 ```text
 HOME_CATEGORIES
@@ -229,11 +258,24 @@ Testimonials
 TestimonialCard
 ```
 
-This structure will later be replaced with backend API data without changing the UI components.
+The UI components remain unchanged when data is later fetched from the backend API.
 
 ---
 
-## Current Progress
+# Design Principles
+
+* Mobile-first development
+* Component-based architecture
+* Reusable UI components
+* Data-driven rendering with `.map()`
+* Separation of UI and data
+* Consistent design system
+* Clean folder organization
+* Shared application layout
+
+---
+
+# Current Progress
 
 * ✔ Next.js Setup
 * ✔ Global Theme
@@ -243,58 +285,66 @@ This structure will later be replaced with backend API data without changing the
 * ✔ Application Routing
 * ✔ Shared Root Layout
 * ✔ Hero Section
-* ✔ Reusable Button Component
 * ✔ Categories Preview Section
-* ✔ Reusable CategoryCard Component
 * ✔ Featured Products Section
-* ✔ Reusable ProductCard Component
 * ✔ Why Choose Us Section
-* ✔ Reusable FeatureCard Component
 * ✔ Testimonials Section
-* ✔ Reusable TestimonialCard Component
+* ✔ Homepage Footer
+* ✔ Reusable UI Components
 * ✔ Data-driven UI Rendering
+* ✔ Homepage Completed
 
 ---
 
-## Completed Milestones
+# Completed Milestones
 
-### Milestone 1
+## Milestone 1
 
-* ✔ Responsive Navbar
-* ✔ Mobile Navigation
-* ✔ Application Routing
-* ✔ Shared Root Layout
+* Responsive Navbar
+* Mobile Navigation
+* Application Routing
+* Shared Root Layout
 
-### Milestone 2
+## Milestone 2
 
-* ✔ Hero Section
-* ✔ Reusable Button Component
+* Hero Section
+* Reusable Button
 
-### Milestone 3
+## Milestone 3
 
-* ✔ Categories Preview Section
-* ✔ Reusable CategoryCard Component
+* Categories Preview
+* Reusable CategoryCard
 
-### Milestone 4
+## Milestone 4
 
-* ✔ Featured Products Section
-* ✔ Reusable ProductCard Component
+* Featured Products
+* Reusable ProductCard
 
-### Milestone 5
+## Milestone 5
 
-* ✔ Why Choose Us Section
-* ✔ Reusable FeatureCard Component
+* Why Choose Us
+* Reusable FeatureCard
 
-### Milestone 6
+## Milestone 6
 
-* ✔ Testimonials Section
-* ✔ Reusable TestimonialCard Component
+* Testimonials
+* Reusable TestimonialCard
 
----
-
-## Next Milestone
+## Milestone 7
 
 * Footer
-* Hero section with real product images
-* Product listing page
-* Backend integration for categories and products
+* Shared Footer Layout
+* Homepage Completion
+
+---
+
+# Next Milestone (Phase 2)
+
+* Product Catalog Page
+* Product Details Page
+* Category Filtering
+* Search Functionality
+* Backend Integration
+* Product Image Management
+* Admin Dashboard
+* Authentication
