@@ -1,17 +1,35 @@
-export const metadata = {
-  title: "Products | Homemade by Amma",
-};
+"use client";
+
+import { useState } from "react";
+
+import PageHeader from "../../components/products/PageHeader";
+import ProductToolbar from "../../components/products/ProductToolbar";
+import ProductGrid from "../../components/products/ProductGrid";
 
 export default function ProductsPage() {
-  return (
-    <main className="mx-auto max-w-7xl px-6 py-10">
-      <h1 className="text-3xl font-bold text-amber-700">
-        Products
-      </h1>
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All Categories");
 
-      <p className="mt-3 text-gray-600">
-        Browse our freshly prepared homemade products.
-      </p>
-    </main>
+  return (
+    <>
+      <PageHeader
+        title="Our Products"
+        description="Discover fresh homemade sweets, snacks, pickles and flours prepared with love and quality ingredients."
+      />
+
+      <ProductToolbar
+        search={search}
+        onSearchChange={(e) => setSearch(e.target.value)}
+        category={category}
+        onCategoryChange={(e) => setCategory(e.target.value)}
+        onClearSearch={() => setSearch("")}
+      />
+
+      <ProductGrid
+        search={search}
+        category={category}
+        onClearSearch={() => setSearch("")}
+      />
+    </>
   );
 }
