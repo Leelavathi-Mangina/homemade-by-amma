@@ -9,6 +9,7 @@ src/
     ├── categories/
     ├── contact/
     ├── products/
+    │   └── page.js
     ├── globals.css
     ├── layout.js
     └── page.js
@@ -34,6 +35,12 @@ components/
 │   ├── Footer.jsx
 │   ├── FooterLinks.jsx
 │   └── FooterContact.jsx
+├── products/
+│   ├── PageHeader.jsx
+│   ├── ProductToolbar.jsx
+│   ├── SearchBar.jsx
+│   ├── CategoryFilter.jsx
+│   └── ProductGrid.jsx
 └── ui/
     └── Button.jsx
 
@@ -41,6 +48,7 @@ constants/
 ├── navigation.js
 ├── categories.js
 ├── products.js
+├── productCategories.js
 ├── features.js
 └── testimonials.js
 ```
@@ -49,11 +57,11 @@ constants/
 
 # Routing
 
-* /
-* /about
-* /categories
-* /products
-* /contact
+- /
+- /about
+- /categories
+- /products
+- /contact
 
 ---
 
@@ -82,6 +90,8 @@ Navbar
 └── MobileMenu
 ```
 
+---
+
 ## Homepage
 
 ```text
@@ -93,132 +103,166 @@ HomePage
 │   └── ProductCard
 ├── WhyChooseUs
 │   └── FeatureCard
-└── Testimonials
-    └── TestimonialCard
+├── Testimonials
+│   └── TestimonialCard
+└── Footer
 ```
+
+---
+
+## Product Catalog
+
+```text
+ProductsPage
+├── PageHeader
+├── ProductToolbar
+│   ├── SearchBar
+│   └── CategoryFilter
+└── ProductGrid
+    └── ProductCard
+```
+
+---
+
+# Homepage Features
+
+## Hero Section
+
+- Responsive two-column layout
+- Brand badge
+- Main heading
+- Business description
+- Trust indicators
+- Reusable CTA button
+- Decorative image card
+
+---
+
+## Categories Preview
+
+- Responsive category grid
+- Reusable CategoryCard
+- Data-driven rendering
+- Centralized category data
+- Premium hover animations
+
+---
+
+## Featured Products
+
+- Responsive product grid
+- Reusable ProductCard
+- Data-driven rendering
+- Category badge
+- Product pricing
+- View All Products button
+
+---
+
+## Why Choose Us
+
+- Responsive feature grid
+- Reusable FeatureCard
+- Trust-focused business highlights
+- Data-driven rendering
+
+---
+
+## Testimonials
+
+- Responsive testimonial grid
+- Reusable TestimonialCard
+- Five-star ratings
+- Decorative quotation styling
+
+---
 
 ## Footer
 
+- Three-column responsive layout
+- Brand information
+- Quick links
+- Contact information
+- Copyright section
+
+---
+
+# Product Catalog Features
+
+## Products Page
+
+- Dedicated Products page
+- Reusable PageHeader
+- Responsive layout
+
+---
+
+## Product Toolbar
+
+- Live search
+- Dynamic category dropdown
+- Controlled components
+- Clear Search button
+
+---
+
+## Product Grid
+
+- Live filtering
+- Product counter
+- Empty state
+- Responsive product cards
+- Search + category filtering
+
+---
+
+# State Architecture
+
 ```text
-Footer
-├── FooterLinks
-└── FooterContact
+ProductsPage
+        │
+        ▼
+ search state
+ category state
+        │
+        ├──────────────┐
+        ▼              ▼
+ProductToolbar    ProductGrid
 ```
 
----
-
-# Hero Section
-
-## Features Implemented
-
-* Responsive two-column layout
-* Brand badge
-* Main heading
-* Business description
-* Trust indicators
-* Reusable CTA button
-* Responsive image placeholder
-* Decorative image card
-
----
-
-# Categories Preview Section
-
-## Features Implemented
-
-* Responsive category grid
-* Reusable `CategoryCard`
-* Data-driven rendering using `.map()`
-* Centralized category data
-* Premium hover animations
-* Mobile-first responsive layout
-
----
-
-# Featured Products Section
-
-## Features Implemented
-
-* Responsive product grid
-* Reusable `ProductCard`
-* Data-driven rendering
-* Centralized product data
-* Category badge
-* Product pricing
-* Reusable CTA button
-* View All Products button
-* Premium hover animations
-* Mobile-first responsive layout
-
----
-
-# Why Choose Us Section
-
-## Features Implemented
-
-* Responsive feature grid
-* Reusable `FeatureCard`
-* Data-driven rendering
-* Centralized feature data
-* Trust-focused business highlights
-* Premium hover animations
-* Mobile-first responsive layout
-
----
-
-# Testimonials Section
-
-## Features Implemented
-
-* Responsive testimonial grid
-* Reusable `TestimonialCard`
-* Data-driven rendering
-* Centralized testimonial data
-* Five-star ratings
-* Decorative quotation styling
-* Premium hover animations
-* Mobile-first responsive layout
-
----
-
-# Footer
-
-## Features Implemented
-
-* Three-column responsive layout
-* Brand information
-* Quick navigation links
-* Contact information
-* Copyright section
-* Shared layout integration
-* Mobile-first responsive design
+State is lifted to the page component while child components remain reusable.
 
 ---
 
 # Current Theme
 
-* Poppins Typography
-* Warm food-inspired color palette
-* Amber primary color
-* Soft rounded corners
-* Consistent spacing system
-* Responsive layout
+- Poppins Typography
+- Warm food-inspired palette
+- Amber primary color
+- Soft rounded corners
+- Consistent spacing system
+- Responsive layouts
 
 ---
 
 # Reusable Components
 
-* Button
-* Navbar
-* Desktop Navigation
-* Mobile Navigation
-* Footer
-* FooterLinks
-* FooterContact
-* CategoryCard
-* ProductCard
-* FeatureCard
-* TestimonialCard
+- Button
+- Navbar
+- Desktop Navigation
+- Mobile Navigation
+- Footer
+- FooterLinks
+- FooterContact
+- CategoryCard
+- ProductCard
+- FeatureCard
+- TestimonialCard
+- PageHeader
+- ProductToolbar
+- SearchBar
+- CategoryFilter
+- ProductGrid
 
 ---
 
@@ -256,95 +300,96 @@ Testimonials
         │
         ▼
 TestimonialCard
+
+PRODUCT_CATEGORIES
+        │
+        ▼
+CategoryFilter
+
+HOME_FEATURED_PRODUCTS
+        │
+        ▼
+ProductGrid
+        │
+        ▼
+ProductCard
 ```
 
-The UI components remain unchanged when data is later fetched from the backend API.
+UI components remain unchanged when data is later fetched from the backend API.
 
 ---
 
 # Design Principles
 
-* Mobile-first development
-* Component-based architecture
-* Reusable UI components
-* Data-driven rendering with `.map()`
-* Separation of UI and data
-* Consistent design system
-* Clean folder organization
-* Shared application layout
+- Mobile-first development
+- Component-based architecture
+- Reusable UI components
+- Data-driven rendering
+- Separation of UI and data
+- Single responsibility principle
+- Lifted state management
+- Shared application layout
 
 ---
 
 # Current Progress
 
-* ✔ Next.js Setup
-* ✔ Global Theme
-* ✔ Component Architecture
-* ✔ Responsive Navbar
-* ✔ Mobile Navigation
-* ✔ Application Routing
-* ✔ Shared Root Layout
-* ✔ Hero Section
-* ✔ Categories Preview Section
-* ✔ Featured Products Section
-* ✔ Why Choose Us Section
-* ✔ Testimonials Section
-* ✔ Homepage Footer
-* ✔ Reusable UI Components
-* ✔ Data-driven UI Rendering
-* ✔ Homepage Completed
+- ✔ Next.js Setup
+- ✔ Global Theme
+- ✔ Component Architecture
+- ✔ Responsive Navbar
+- ✔ Mobile Navigation
+- ✔ Shared Root Layout
+- ✔ Homepage Completed
+- ✔ Product Catalog Page
+- ✔ Live Search
+- ✔ Category Filtering
+- ✔ Product Counter
+- ✔ Clear Search
+- ✔ Empty State
+- ✔ Controlled Components
+- ✔ State Lifting
+- ✔ Data-driven UI Rendering
 
 ---
 
 # Completed Milestones
 
-## Milestone 1
+## Phase 1 — Homepage
 
-* Responsive Navbar
-* Mobile Navigation
-* Application Routing
-* Shared Root Layout
-
-## Milestone 2
-
-* Hero Section
-* Reusable Button
-
-## Milestone 3
-
-* Categories Preview
-* Reusable CategoryCard
-
-## Milestone 4
-
-* Featured Products
-* Reusable ProductCard
-
-## Milestone 5
-
-* Why Choose Us
-* Reusable FeatureCard
-
-## Milestone 6
-
-* Testimonials
-* Reusable TestimonialCard
-
-## Milestone 7
-
-* Footer
-* Shared Footer Layout
-* Homepage Completion
+- Responsive Navbar
+- Hero Section
+- Categories Preview
+- Featured Products
+- Why Choose Us
+- Testimonials
+- Footer
+- Homepage Completion
 
 ---
 
-# Next Milestone (Phase 2)
+## Phase 2 — Product Catalog (Milestone 1)
 
-* Product Catalog Page
-* Product Details Page
-* Category Filtering
-* Search Functionality
-* Backend Integration
-* Product Image Management
-* Admin Dashboard
-* Authentication
+- Product Catalog Page
+- Product Toolbar
+- Live Search
+- Dynamic Category Filter
+- Product Counter
+- Clear Search
+- Empty State
+- Lifted State Architecture
+
+---
+
+# Next Milestone
+
+## Phase 3
+
+- Product Details Page
+- Categories Page
+- About Page
+- Contact Page improvements
+- Backend Integration
+- Product Image Management
+- Admin Dashboard
+- Authentication
