@@ -1,13 +1,16 @@
 # Frontend Architecture
 
-## Current Structure
+## Project Structure
 
 ```text
 src/
 └── app/
     ├── about/
+    │   └── page.js
     ├── categories/
+    │   └── page.js
     ├── contact/
+    │   └── page.js
     ├── products/
     │   └── page.js
     ├── globals.css
@@ -26,6 +29,20 @@ components/
 │   ├── FeatureCard.jsx
 │   ├── Testimonials.jsx
 │   └── TestimonialCard.jsx
+├── about/
+│   ├── AboutHero.jsx
+│   ├── OurStory.jsx
+│   ├── OurValues.jsx
+│   ├── ValueCard.jsx
+│   ├── PreparationProcess.jsx
+│   ├── ProcessCard.jsx
+│   ├── WhyTrustUs.jsx
+│   ├── TrustCard.jsx
+│   └── AboutCTA.jsx
+├── categories/
+│   ├── CategoriesHero.jsx
+│   ├── CategorySummary.jsx
+│   └── CategoryGrid.jsx
 ├── layout/
 │   ├── Navbar.jsx
 │   ├── DesktopNav.jsx
@@ -47,21 +64,24 @@ components/
 constants/
 ├── navigation.js
 ├── categories.js
-├── products.js
 ├── productCategories.js
+├── products.js
 ├── features.js
-└── testimonials.js
+├── testimonials.js
+├── values.js
+├── preparationProcess.js
+└── trust.js
 ```
 
 ---
 
 # Routing
 
-- /
-- /about
-- /categories
-- /products
-- /contact
+* /
+* /products
+* /categories
+* /about
+* /contact
 
 ---
 
@@ -78,19 +98,6 @@ RootLayout
 ---
 
 # Component Hierarchy
-
-## Navbar
-
-```text
-Navbar
-├── Logo
-├── DesktopNav
-├── NavbarActions
-├── MobileMenuButton
-└── MobileMenu
-```
-
----
 
 ## Homepage
 
@@ -110,7 +117,7 @@ HomePage
 
 ---
 
-## Product Catalog
+## Products Page
 
 ```text
 ProductsPage
@@ -124,95 +131,102 @@ ProductsPage
 
 ---
 
+## Categories Page
+
+```text
+CategoriesPage
+├── CategoriesHero
+├── CategorySummary
+└── CategoryGrid
+    └── CategoryCard
+```
+
+---
+
+## About Page
+
+```text
+AboutPage
+├── AboutHero
+├── OurStory
+├── OurValues
+│   └── ValueCard
+├── PreparationProcess
+│   └── ProcessCard
+├── WhyTrustUs
+│   └── TrustCard
+└── AboutCTA
+```
+
+---
+
 # Homepage Features
 
-## Hero Section
-
-- Responsive two-column layout
-- Brand badge
-- Main heading
-- Business description
-- Trust indicators
-- Reusable CTA button
-- Decorative image card
-
----
-
-## Categories Preview
-
-- Responsive category grid
-- Reusable CategoryCard
-- Data-driven rendering
-- Centralized category data
-- Premium hover animations
-
----
-
-## Featured Products
-
-- Responsive product grid
-- Reusable ProductCard
-- Data-driven rendering
-- Category badge
-- Product pricing
-- View All Products button
-
----
-
-## Why Choose Us
-
-- Responsive feature grid
-- Reusable FeatureCard
-- Trust-focused business highlights
-- Data-driven rendering
-
----
-
-## Testimonials
-
-- Responsive testimonial grid
-- Reusable TestimonialCard
-- Five-star ratings
-- Decorative quotation styling
-
----
-
-## Footer
-
-- Three-column responsive layout
-- Brand information
-- Quick links
-- Contact information
-- Copyright section
+* Hero section
+* Categories preview
+* Featured products
+* Why Choose Us
+* Testimonials
+* Footer
 
 ---
 
 # Product Catalog Features
 
-## Products Page
-
-- Dedicated Products page
-- Reusable PageHeader
-- Responsive layout
-
----
-
-## Product Toolbar
-
-- Live search
-- Dynamic category dropdown
-- Controlled components
-- Clear Search button
+* Dedicated Products page
+* Live search
+* Dynamic category filtering
+* Controlled components
+* Product counter
+* Empty state
+* Clear Search
+* Responsive product grid
 
 ---
 
-## Product Grid
+# Categories Page Features
 
-- Live filtering
-- Product counter
-- Empty state
-- Responsive product cards
-- Search + category filtering
+* Categories hero
+* Dynamic category summary
+* Responsive category grid
+* Category navigation to Products page
+* URL query parameter support
+
+---
+
+# About Page Features
+
+## About Hero
+
+* Business introduction
+* Browse Products CTA
+
+## Our Story
+
+* Family business story
+* Homemade philosophy
+
+## Our Values
+
+* Reusable ValueCard
+* Data-driven rendering
+
+## Preparation Process
+
+* Four-step homemade workflow
+* Order-based preparation
+* Reusable ProcessCard
+
+## Why Customers Trust Us
+
+* Reusable TrustCard
+* Trust highlights
+* Data-driven rendering
+
+## Final CTA
+
+* Browse Products button
+* Navigation to Products page
 
 ---
 
@@ -222,47 +236,15 @@ ProductsPage
 ProductsPage
         │
         ▼
- search state
- category state
+ search
+ category
         │
-        ├──────────────┐
-        ▼              ▼
-ProductToolbar    ProductGrid
+        ├─────────────┐
+        ▼             ▼
+ProductToolbar   ProductGrid
 ```
 
 State is lifted to the page component while child components remain reusable.
-
----
-
-# Current Theme
-
-- Poppins Typography
-- Warm food-inspired palette
-- Amber primary color
-- Soft rounded corners
-- Consistent spacing system
-- Responsive layouts
-
----
-
-# Reusable Components
-
-- Button
-- Navbar
-- Desktop Navigation
-- Mobile Navigation
-- Footer
-- FooterLinks
-- FooterContact
-- CategoryCard
-- ProductCard
-- FeatureCard
-- TestimonialCard
-- PageHeader
-- ProductToolbar
-- SearchBar
-- CategoryFilter
-- ProductGrid
 
 ---
 
@@ -306,90 +288,126 @@ PRODUCT_CATEGORIES
         ▼
 CategoryFilter
 
-HOME_FEATURED_PRODUCTS
+VALUES
         │
         ▼
-ProductGrid
+OurValues
         │
         ▼
-ProductCard
+ValueCard
+
+PREPARATION_PROCESS
+        │
+        ▼
+PreparationProcess
+        │
+        ▼
+ProcessCard
+
+TRUST_POINTS
+        │
+        ▼
+WhyTrustUs
+        │
+        ▼
+TrustCard
 ```
 
-UI components remain unchanged when data is later fetched from the backend API.
+All UI components remain independent of the data source, making backend integration straightforward.
 
 ---
 
 # Design Principles
 
-- Mobile-first development
-- Component-based architecture
-- Reusable UI components
-- Data-driven rendering
-- Separation of UI and data
-- Single responsibility principle
-- Lifted state management
-- Shared application layout
+* Mobile-first development
+* Component-based architecture
+* Reusable UI components
+* Data-driven rendering
+* Separation of UI and data
+* Lifted state management
+* Shared application layout
+* Single Responsibility Principle (SRP)
 
 ---
 
 # Current Progress
 
-- ✔ Next.js Setup
-- ✔ Global Theme
-- ✔ Component Architecture
-- ✔ Responsive Navbar
-- ✔ Mobile Navigation
-- ✔ Shared Root Layout
-- ✔ Homepage Completed
-- ✔ Product Catalog Page
-- ✔ Live Search
-- ✔ Category Filtering
-- ✔ Product Counter
-- ✔ Clear Search
-- ✔ Empty State
-- ✔ Controlled Components
-- ✔ State Lifting
-- ✔ Data-driven UI Rendering
+* ✔ Next.js Setup
+* ✔ Global Theme
+* ✔ Responsive Navbar
+* ✔ Shared Layout
+* ✔ Homepage Completed
+* ✔ Product Catalog Completed
+* ✔ Categories Page Completed
+* ✔ About Page Completed
+* ✔ Live Search
+* ✔ Dynamic Category Filtering
+* ✔ Product Counter
+* ✔ Empty State
+* ✔ URL Category Navigation
+* ✔ Controlled Components
+* ✔ Data-driven Rendering
 
 ---
 
-# Completed Milestones
+# Completed Phases
 
 ## Phase 1 — Homepage
 
-- Responsive Navbar
-- Hero Section
-- Categories Preview
-- Featured Products
-- Why Choose Us
-- Testimonials
-- Footer
-- Homepage Completion
+* Responsive Navbar
+* Hero
+* Categories Preview
+* Featured Products
+* Why Choose Us
+* Testimonials
+* Footer
 
 ---
 
-## Phase 2 — Product Catalog (Milestone 1)
+## Phase 2 — Product Catalog
 
-- Product Catalog Page
-- Product Toolbar
-- Live Search
-- Dynamic Category Filter
-- Product Counter
-- Clear Search
-- Empty State
-- Lifted State Architecture
+* Product Catalog
+* Live Search
+* Category Filtering
+* Product Counter
+* Empty State
+* Dynamic Category Navigation
 
 ---
 
-# Next Milestone
+## Phase 3 — Customer Pages
 
-## Phase 3
+* ✔ Categories Page
+* ✔ About Page
+* ⏳ Contact Page
+* ⏳ Product Details Page
 
-- Product Details Page
-- Categories Page
-- About Page
-- Contact Page improvements
-- Backend Integration
-- Product Image Management
-- Admin Dashboard
-- Authentication
+---
+
+# Upcoming Roadmap
+
+## Phase 3 (Remaining)
+
+* Contact Page
+* Product Details Page
+
+## Phase 4
+
+* Node.js
+* Express.js
+* MongoDB
+* REST API Integration
+
+## Phase 5
+
+* Admin Dashboard
+* Product Management
+* Authentication
+* Image Upload
+
+## Phase 6
+
+* Real Product Images
+* WhatsApp Order Workflow
+* Deployment
+* Production Launch
