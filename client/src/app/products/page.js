@@ -1,14 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import PageHeader from "../../components/products/PageHeader";
 import ProductToolbar from "../../components/products/ProductToolbar";
 import ProductGrid from "../../components/products/ProductGrid";
+import { HOME_CATEGORIES } from "../../constants/categories";
 
 export default function ProductsPage() {
+  const searchParams = useSearchParams();
+
+  const categoryFromUrl = searchParams.get("category");
+
+  const matchedCategory = HOME_CATEGORIES.find(
+    (category) => category.slug === categoryFromUrl,
+  );
+
+  const initialCategory = matchedCategory
+    ? matchedCategory.title
+    : "All Categories";
+
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All Categories");
+  const [category, setCategory] = useState(initialCategory);
 
   return (
     <>

@@ -1,17 +1,19 @@
-export const metadata = {
-  title: "About | Homemade by Amma",
-};
+import AboutHero from "../../components/about/AboutHero";
+import OurStory from "../../components/about/OurStory";
+import OurValues from "../../components/about/OurValues";
+import PreparationProcess from "../../components/about/PreparationProcess";
+import WhyTrustUs from "../../components/about/WhyTrustUs";
+import AboutCTA from "../../components/about/AboutCTA";
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-7xl px-6 py-10">
-      <h1 className="text-3xl font-bold text-amber-700">
-        About Us
-      </h1>
-
-      <p className="mt-3 text-gray-600">
-        Learn more about Homemade by Amma.
-      </p>
+    <main>
+      <AboutHero />
+      <OurStory />
+      <OurValues />
+      <PreparationProcess />
+      <WhyTrustUs />
+      <AboutCTA />
     </main>
   );
 }
