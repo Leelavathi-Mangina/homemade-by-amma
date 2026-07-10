@@ -16,7 +16,7 @@ src/
     ├── globals.css
     ├── layout.js
     └── page.js
-
+```text
 components/
 ├── common/
 ├── home/
@@ -43,6 +43,12 @@ components/
 │   ├── CategoriesHero.jsx
 │   ├── CategorySummary.jsx
 │   └── CategoryGrid.jsx
+├── contact/
+│   ├── ContactHero.jsx
+│   ├── ContactCards.jsx
+│   ├── ContactCard.jsx
+│   ├── BusinessHours.jsx
+│   └── ContactForm.jsx
 ├── layout/
 │   ├── Navbar.jsx
 │   ├── DesktopNav.jsx
@@ -70,7 +76,10 @@ constants/
 ├── testimonials.js
 ├── values.js
 ├── preparationProcess.js
-└── trust.js
+├── trust.js
+└── contact.js
+```
+
 ```
 
 ---
@@ -157,6 +166,26 @@ AboutPage
 │   └── TrustCard
 └── AboutCTA
 ```
+```text
+
+```
+
+---
+
+## Contact Page
+
+```text
+ContactPage
+├── ContactHero
+├── ContactCards
+│   └── ContactCard
+├── OrderInformation
+├── ContactForm
+└── Footer
+```
+```text
+```
+
 
 ---
 
@@ -227,6 +256,38 @@ AboutPage
 
 * Browse Products button
 * Navigation to Products page
+
+## Contact Page Features
+
+### Contact Hero
+
+* Business-focused introduction
+* Friendly customer messaging
+
+### Contact Information
+
+* Phone
+* Email
+* Location
+* Reusable ContactCard
+* Data-driven rendering
+
+### Order Information
+
+* Fresh preparation after confirmation
+* Advance order guidance
+* Order confirmation process
+
+### Contact Form
+
+* Name
+* Phone Number
+* Email (Optional)
+* Product / Occasion
+* Message
+* Backend-ready form layout
+* Reusable Button component
+
 
 ---
 
@@ -311,6 +372,18 @@ WhyTrustUs
         │
         ▼
 TrustCard
+        │
+        ▼
+```text
+CONTACT_INFO
+        │
+        ▼
+ContactCards
+        │
+        ▼
+ContactCard
+```
+
 ```
 
 All UI components remain independent of the data source, making backend integration straightforward.
@@ -330,7 +403,8 @@ All UI components remain independent of the data source, making backend integrat
 
 ---
 
-# Current Progress
+
+## Current Progress
 
 * ✔ Next.js Setup
 * ✔ Global Theme
@@ -340,6 +414,7 @@ All UI components remain independent of the data source, making backend integrat
 * ✔ Product Catalog Completed
 * ✔ Categories Page Completed
 * ✔ About Page Completed
+* ✔ Contact Page Completed
 * ✔ Live Search
 * ✔ Dynamic Category Filtering
 * ✔ Product Counter
@@ -347,6 +422,7 @@ All UI components remain independent of the data source, making backend integrat
 * ✔ URL Category Navigation
 * ✔ Controlled Components
 * ✔ Data-driven Rendering
+
 
 ---
 
@@ -379,33 +455,34 @@ All UI components remain independent of the data source, making backend integrat
 
 * ✔ Categories Page
 * ✔ About Page
-* ⏳ Contact Page
+* ✔ Contact Page
 * ⏳ Product Details Page
+
 
 ---
 
 # Upcoming Roadmap
 
-## Phase 3 (Remaining)
+## Phase 4
 
-* Contact Page
+* Enhance Product Data Model
 * Product Details Page
 
-## Phase 4
+## Phase 5
 
 * Node.js
 * Express.js
 * MongoDB
 * REST API Integration
 
-## Phase 5
+## Phase 6
 
 * Admin Dashboard
 * Product Management
 * Authentication
 * Image Upload
 
-## Phase 6
+## Phase 7
 
 * Real Product Images
 * WhatsApp Order Workflow
