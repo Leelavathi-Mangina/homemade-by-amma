@@ -57,6 +57,8 @@ export default function ProductGrid({ search, category, onClearSearch }) {
               name={product.name}
               category={product.category}
               price={product.price}
+              unit={product.unit}
+              shortDescription={product.shortDescription}
             />
           ))}
         </div>

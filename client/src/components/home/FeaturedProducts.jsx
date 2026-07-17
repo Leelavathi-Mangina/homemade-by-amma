@@ -28,6 +28,8 @@ export default function FeaturedProducts() {
               name={product.name}
               category={product.category}
               price={product.price}
+              unit={product.unit}
+              shortDescription={product.shortDescription}
             />
           ))}
         </div>
