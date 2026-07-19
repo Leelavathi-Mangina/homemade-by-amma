@@ -27,6 +27,7 @@ export default function CategoriesPreview() {
               icon={category.icon}
               title={category.title}
               description={category.description}
+              href="/categories"
             />
           ))}
         </div>

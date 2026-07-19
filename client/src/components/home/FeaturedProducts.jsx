@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ProductCard from "./ProductCard";
 import { HOME_FEATURED_PRODUCTS } from "../../constants/products";
 import Button from "../ui/Button";
@@ -36,7 +37,9 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="mt-14 text-center">
-          <Button variant="secondary">View All Products</Button>
+          <Link href="/products">
+            <Button variant="secondary">View All Products</Button>
+          </Link>
         </div>
       </div>
     </section>

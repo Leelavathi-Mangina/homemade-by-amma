@@ -9,9 +9,11 @@ export default function CategoryGrid() {
         {HOME_CATEGORIES.map((category) => (
           <Link key={category.id} href={`/products?category=${category.slug}`}>
             <CategoryCard
+              key={category.id}
               icon={category.icon}
               title={category.title}
               description={category.description}
+              href={`/products?category=${category.slug}`}
             />
           </Link>
         ))}

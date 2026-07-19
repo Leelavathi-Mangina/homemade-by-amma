@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Leaf, ChefHat, PartyPopper } from "lucide-react";
 import Button from "../ui/Button";
 
@@ -43,9 +44,11 @@ export default function Hero() {
             </div>
 
             <div className="mt-10">
-              <Button className="px-8 py-4 text-base">
-                Explore Homemade Products
-              </Button>
+              <Link href="/products">
+                <Button className="px-8 py-4 text-base">
+                  Explore Homemade Products
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="flex justify-center">
@@ -63,7 +66,7 @@ export default function Hero() {
 
                 <p className="mt-2 text-gray-400">
                   Real product photographs
-                  <br/>
+                  <br />
                   coming soon...
                 </p>
               </div>
