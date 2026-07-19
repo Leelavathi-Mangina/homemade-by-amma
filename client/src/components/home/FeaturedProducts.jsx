@@ -30,6 +30,7 @@ export default function FeaturedProducts() {
               price={product.price}
               unit={product.unit}
               shortDescription={product.shortDescription}
+              slug={product.slug}
             />
           ))}
         </div>
