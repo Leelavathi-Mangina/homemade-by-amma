@@ -24,6 +24,17 @@ const categorySchema = new mongoose.Schema(
       lowercase: true,
     },
 
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    image: {
+      type: String,
+      default: "",
+    },
+
     isActive: {
       type: Boolean,
       default: true,
