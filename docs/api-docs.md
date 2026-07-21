@@ -39,7 +39,9 @@ Admin Role Required
 {
   "categoryId": "01",
   "name": "Sweets",
-  "slug": "sweets"
+  "slug": "sweets",
+  "description": "Traditional festive sweets prepared with authentic homemade recipes.",
+  "image": ""
 }
 ```
 

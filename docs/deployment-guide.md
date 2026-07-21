@@ -322,6 +322,22 @@ www.homemadebyamma.com
 
 ---
 
+# Current Data Models
+
+## Category
+
+Fields:
+
+- categoryId
+- name
+- slug
+- description
+- image (Cloudinary-ready)
+- isActive
+
+The image field is intentionally included before Cloudinary integration so that no schema changes are required later when category images are uploaded.
+
+
 # Deployment Status
 
 ## Completed

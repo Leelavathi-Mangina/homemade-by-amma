@@ -108,6 +108,8 @@ server
 * categoryId
 * name
 * slug
+* description
+* image
 * isActive
 
 ---
