@@ -87,8 +87,33 @@ Admin Role Required
   "name": "Boondi Laddu",
   "slug": "boondi-laddu",
   "category": "categoryObjectId",
-  "description": "Fresh homemade boondi laddus",
-  "price": 450
+
+  "shortDescription": "Soft homemade laddus prepared with pure ghee.",
+
+  "description": "Fresh homemade boondi laddus prepared after order confirmation using authentic homemade recipes.",
+
+  "ingredients": [
+    "Besan",
+    "Pure Ghee",
+    "Sugar",
+    "Cardamom"
+  ],
+
+  "shelfLife": "7 Days",
+
+  "madeToOrder": true,
+
+  "price": 450,
+
+  "unit": "kg",
+
+  "approximatePiecesPerKg": 25,
+
+  "minOrderQuantity": 2,
+
+  "estimatedDeliveryDays": 3,
+
+  "customizable": true
 }
 ```
 

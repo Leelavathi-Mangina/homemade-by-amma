@@ -10,7 +10,9 @@ const createProduct = asyncHandler(
       name,
       slug,
       category,
+      shortDescription,
       description,
+      shelfLife,
       price,
     } = req.body;
 
@@ -19,7 +21,9 @@ const createProduct = asyncHandler(
       !name ||
       !slug ||
       !category ||
+      !shortDescription ||
       !description ||
+      !shelfLife ||
       !price
     ) {
       return res.status(400).json(
@@ -98,5 +102,3 @@ module.exports = {
   createProduct,
   getProducts,
 };
-
-

@@ -519,23 +519,51 @@ All UI components remain independent of the data source, making backend integrat
 
 # Upcoming Roadmap
 
-## Phase 5
+## Phase 5 — Backend Integration
 
-* Node.js
-* Express.js
-* MongoDB
-* REST API Integration
+- Connect Products page with Product API
+- Connect Categories page with Category API
+- Connect Product Details page with Product API
+- Replace static constants with backend data
+- Connect Contact Form with Contact API
+- End-to-end frontend and backend integration
 
-## Phase 6
+---
 
-* Admin Dashboard
-* Product Management
-* Authentication
-* Image Upload
+## Phase 6 — Customer Features
 
-## Phase 7
+- Customer Registration UI
+- Customer Login UI
+- Customer Dashboard
+- Shopping Cart UI
+- Checkout Flow
+- Razorpay Checkout Integration
+- Order History
+- Profile Management
 
-* Real Product Images
-* WhatsApp Order Workflow
-* Deployment
-* Production Launch
+---
+
+## Phase 7 — Admin Dashboard
+
+- Admin Login
+- Dashboard Overview
+- Product Management (CRUD)
+- Category Management (CRUD)
+- Order Management
+- Customer Management
+- Image Upload Integration
+
+---
+
+## Phase 8 — Deployment & Production
+
+- Cloudinary Integration
+- Frontend Deployment (Vercel)
+- Backend Deployment (Render)
+- Production Environment Configuration
+- Custom Domain
+- SSL Configuration
+- Logging & Monitoring
+- API Rate Limiting
+- Performance Optimization
+- Backup & Recovery Strategy

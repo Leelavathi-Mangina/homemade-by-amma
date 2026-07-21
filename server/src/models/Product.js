@@ -29,9 +29,37 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
 
+    // NEW
+    shortDescription: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
     description: {
       type: String,
       required: true,
+    },
+
+    // NEW
+    ingredients: [
+      {
+        type: String,
+        trim: true,
+      },
+    ],
+
+    // NEW
+    shelfLife: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    // NEW
+    madeToOrder: {
+      type: Boolean,
+      default: true,
     },
 
     price: {
@@ -76,7 +104,6 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-
   },
   {
     timestamps: true,
