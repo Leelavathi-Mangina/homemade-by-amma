@@ -1,18 +1,14 @@
-import { HOME_FEATURED_PRODUCTS } from "../../../constants/products";
 import ProductDetails from "../../../components/products/ProductDetails";
-
+import { getProductBySlug } from "../../../lib/api/product";
 
 export default async function ProductDetailsPage({ params }) {
-
   const { slug } = await params;
 
+  try {
+    const product = await getProductBySlug(slug);
 
-  const product = HOME_FEATURED_PRODUCTS.find(
-    (item) => item.slug === slug
-  );
-
-
-  if (!product) {
+    return <ProductDetails product={product} />;
+  } catch (error) {
     return (
       <div className="py-20 text-center">
         <h1 className="text-3xl font-bold">
@@ -21,9 +17,4 @@ export default async function ProductDetailsPage({ params }) {
       </div>
     );
   }
-
-
-  return (
-    <ProductDetails product={product} />
-  );
 }

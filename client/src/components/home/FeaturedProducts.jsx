@@ -1,9 +1,11 @@
 import Link from "next/link";
 import ProductCard from "./ProductCard";
-import { HOME_FEATURED_PRODUCTS } from "../../constants/products";
 import Button from "../ui/Button";
+import { getFeaturedProducts } from "../../lib/api/products";
 
-export default function FeaturedProducts() {
+export default async function FeaturedProducts() {
+  const products = await getFeaturedProducts();
+
   return (
     <section className="bg-white py-20">
       <div className="mx-auto max-w-7xl px-6">
@@ -22,12 +24,12 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="mt-20 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {HOME_FEATURED_PRODUCTS.map((product) => (
+          {products.map((product) => (
             <ProductCard
-              key={product.id}
-              image={product.image}
+              key={product._id}
+              image={product.images?.[0] || "🍬"}
               name={product.name}
-              category={product.category}
+              category={product.category?.name || ""}
               price={product.price}
               unit={product.unit}
               shortDescription={product.shortDescription}
@@ -38,7 +40,9 @@ export default function FeaturedProducts() {
 
         <div className="mt-14 text-center">
           <Link href="/products">
-            <Button variant="secondary">View All Products</Button>
+            <Button variant="secondary">
+              View All Products
+            </Button>
           </Link>
         </div>
       </div>

@@ -1,18 +1,55 @@
+import { useEffect, useState } from "react";
+
 import Button from "../ui/Button";
 import ProductCard from "../home/ProductCard";
-import { HOME_FEATURED_PRODUCTS } from "../../constants/products";
+import { getProducts } from "../../lib/api/products";
 
-export default function ProductGrid({ search, category, onClearSearch }) {
+export default function ProductGrid({
+  search,
+  category,
+  onClearSearch,
+}) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const searchText = search.trim().toLowerCase();
 
-  const filteredProducts = HOME_FEATURED_PRODUCTS.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchText);
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const data = await getProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, []);
+
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch = product.name
+      .toLowerCase()
+      .includes(searchText);
 
     const matchesCategory =
-      category === "All Categories" || product.category === category;
+      category === "All Categories" ||
+      product.category?.name === category;
 
     return matchesSearch && matchesCategory;
   });
+
+  if (loading) {
+    return (
+      <section className="py-20 text-center">
+        <p className="text-gray-600 text-lg">
+          Loading products...
+        </p>
+      </section>
+    );
+  }
 
   return (
     <section className="pb-20">
@@ -22,7 +59,9 @@ export default function ProductGrid({ search, category, onClearSearch }) {
           <span className="font-semibold text-gray-900">
             {filteredProducts.length}
           </span>{" "}
-          {filteredProducts.length === 1 ? "product" : "products"}
+          {filteredProducts.length === 1
+            ? "product"
+            : "products"}
         </p>
       </div>
 
@@ -36,11 +75,15 @@ export default function ProductGrid({ search, category, onClearSearch }) {
             </h3>
 
             <p className="mx-auto mt-3 max-w-md text-gray-600">
-              Try changing your search or selecting another category.
+              Try changing your search or selecting another
+              category.
             </p>
 
             {search.trim() !== "" && (
-              <Button className="mt-8" onClick={onClearSearch}>
+              <Button
+                className="mt-8"
+                onClick={onClearSearch}
+              >
                 Clear Search
               </Button>
             )}
@@ -52,10 +95,10 @@ export default function ProductGrid({ search, category, onClearSearch }) {
         <div className="mx-auto grid max-w-7xl gap-8 px-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map((product) => (
             <ProductCard
-              key={product.id}
+              key={product._id}
               image={product.image}
               name={product.name}
-              category={product.category}
+              category={product.category?.name}
               price={product.price}
               unit={product.unit}
               shortDescription={product.shortDescription}
