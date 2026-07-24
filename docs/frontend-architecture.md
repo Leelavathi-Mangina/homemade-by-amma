@@ -340,15 +340,17 @@ FeaturedProducts
         ▼
 ProductCard
 
-HOME_FEATURED_PRODUCTS
-        │
-        ▼
-ProductGrid
-        │
-        ▼
-ProductCard
+Homepage Featured Products
 
-Product Object
+MongoDB
+   │
+GET /api/products/featured
+   │
+products.js (API Layer)
+   │
+FeaturedProducts.jsx
+   │
+ProductCard.jsx
 
 id
 slug
