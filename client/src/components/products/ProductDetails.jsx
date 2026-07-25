@@ -1,7 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Button from "../ui/Button";
 
 export default function ProductDetails({ product }) {
+  const [quantity, setQuantity] = useState(
+    product.minOrderQuantity || 1
+  );
+
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-6">
@@ -58,7 +65,9 @@ export default function ProductDetails({ product }) {
 
             {/* Ingredients */}
             <div className="mt-10">
-              <h2 className="text-xl font-bold text-gray-900">Ingredients</h2>
+              <h2 className="text-xl font-bold text-gray-900">
+                Ingredients
+              </h2>
 
               <ul className="mt-4 list-disc space-y-2 pl-5 text-gray-600">
                 {product.ingredients.map((item) => (
@@ -69,15 +78,60 @@ export default function ProductDetails({ product }) {
 
             {/* Shelf Life */}
             <div className="mt-8">
-              <h2 className="text-xl font-bold text-gray-900">Shelf Life</h2>
+              <h2 className="text-xl font-bold text-gray-900">
+                Shelf Life
+              </h2>
 
-              <p className="mt-2 text-gray-600">{product.shelfLife}</p>
+              <p className="mt-2 text-gray-600">
+                {product.shelfLife}
+              </p>
             </div>
 
-            {/* CTA */}
+            {/* Quantity */}
+            <div className="mt-10">
+              <h2 className="mb-4 text-xl font-bold text-gray-900">
+                Quantity
+              </h2>
+
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() =>
+                    setQuantity((prev) =>
+                      Math.max(
+                        product.minOrderQuantity || 1,
+                        prev - 1
+                      )
+                    )
+                  }
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-xl font-bold hover:bg-gray-100"
+                >
+                  −
+                </button>
+
+                <span className="min-w-[40px] text-center text-xl font-bold">
+                  {quantity}
+                </span>
+
+                <button
+                  onClick={() =>
+                    setQuantity((prev) => prev + 1)
+                  }
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-xl font-bold hover:bg-gray-100"
+                >
+                  +
+                </button>
+              </div>
+
+              <p className="mt-2 text-sm text-gray-500">
+                Minimum order: {product.minOrderQuantity}{" "}
+                {product.unit}
+              </p>
+            </div>
+
+            {/* Add To Cart */}
             <div className="mt-10">
               <Button className="bg-amber-800 hover:bg-amber-900">
-                Order Now
+                Add to Cart
               </Button>
             </div>
           </div>

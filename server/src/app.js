@@ -12,11 +12,15 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 
-
-
 const app = express();
 
-app.use(cors());
+//app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 
@@ -29,15 +33,9 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-app.use(
-  "/api/categories",
-  categoryRoutes
-);
+app.use("/api/categories", categoryRoutes);
 
-app.use(
-  "/api/products",
-  productRoutes
-);
+app.use("/api/products", productRoutes);
 
 app.use("/api/auth", authRoutes);
 

@@ -1,4 +1,5 @@
 import { Poppins } from "next/font/google";
+import { AuthProvider } from "../context/AuthContext";
 import "./globals.css";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
@@ -22,13 +23,15 @@ export default function RootLayout({ children }) {
       className={`${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
+        <AuthProvider>
+          <Navbar />
 
-        <main className="flex-1">
-          {children}
-        </main>
+          <main className="flex-1">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

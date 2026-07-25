@@ -138,8 +138,20 @@ const loginUser = asyncHandler(
   }
 );
 
+const logoutUser = (req, res) => {
+  res.clearCookie("token");
+
+  res.status(200).json(
+    new ApiResponse(
+      true,
+      "Logout successful"
+    )
+  );
+};
+
 
 module.exports = {
   registerUser,
   loginUser,
+  logoutUser,
 };
