@@ -4,82 +4,105 @@
 
 ```text
 src/
-└── app/
-    ├── about/
-    │   └── page.js
-    ├── categories/
-    │   └── page.js
-    ├── contact/
-    │   └── page.js
-    ├── products/
-    │   └── page.js
-    ├── globals.css
-    ├── layout.js
-    └── page.js
-```text
-components/
-├── common/
-├── home/
-│   ├── Hero.jsx
-│   ├── CategoriesPreview.jsx
-│   ├── CategoryCard.jsx
-│   ├── FeaturedProducts.jsx
-│   ├── ProductCard.jsx
-│   ├── WhyChooseUs.jsx
-│   ├── FeatureCard.jsx
-│   ├── Testimonials.jsx
-│   └── TestimonialCard.jsx
-├── about/
-│   ├── AboutHero.jsx
-│   ├── OurStory.jsx
-│   ├── OurValues.jsx
-│   ├── ValueCard.jsx
-│   ├── PreparationProcess.jsx
-│   ├── ProcessCard.jsx
-│   ├── WhyTrustUs.jsx
-│   ├── TrustCard.jsx
-│   └── AboutCTA.jsx
-├── categories/
-│   ├── CategoriesHero.jsx
-│   ├── CategorySummary.jsx
-│   └── CategoryGrid.jsx
-├── contact/
-│   ├── ContactHero.jsx
-│   ├── ContactCards.jsx
-│   ├── ContactCard.jsx
-│   ├── BusinessHours.jsx
-│   └── ContactForm.jsx
-├── layout/
-│   ├── Navbar.jsx
-│   ├── DesktopNav.jsx
-│   ├── MobileMenu.jsx
-│   ├── MobileMenuButton.jsx
-│   ├── NavbarActions.jsx
-│   ├── Footer.jsx
-│   ├── FooterLinks.jsx
-│   └── FooterContact.jsx
-├── products/
-│   ├── PageHeader.jsx
-│   ├── ProductToolbar.jsx
-│   ├── SearchBar.jsx
-│   ├── CategoryFilter.jsx
-│   └── ProductGrid.jsx
-└── ui/
-    └── Button.jsx
-
-constants/
-├── navigation.js
-├── categories.js
-├── productCategories.js
-├── products.js
-├── features.js
-├── testimonials.js
-├── values.js
-├── preparationProcess.js
-├── trust.js
-└── contact.js
-```
-
+├── app/
+│   ├── about/
+│   │   └── page.js
+│   ├── categories/
+│   │   └── page.js
+│   ├── contact/
+│   │   └── page.js
+│   ├── login/
+│   │   └── page.js
+│   ├── signup/
+│   │   └── page.js
+│   ├── products/
+│   │   ├── page.js
+│   │   └── [slug]/
+│   │       └── page.js
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+│
+├── components/
+│   ├── common/
+│   │   └── Logo.jsx
+│   │
+│   ├── home/
+│   │   ├── Hero.jsx
+│   │   ├── CategoriesPreview.jsx
+│   │   ├── CategoryCard.jsx
+│   │   ├── FeaturedProducts.jsx
+│   │   ├── ProductCard.jsx
+│   │   ├── WhyChooseUs.jsx
+│   │   ├── FeatureCard.jsx
+│   │   ├── Testimonials.jsx
+│   │   └── TestimonialCard.jsx
+│   │
+│   ├── about/
+│   │   ├── AboutHero.jsx
+│   │   ├── OurStory.jsx
+│   │   ├── OurValues.jsx
+│   │   ├── ValueCard.jsx
+│   │   ├── PreparationProcess.jsx
+│   │   ├── ProcessCard.jsx
+│   │   ├── WhyTrustUs.jsx
+│   │   ├── TrustCard.jsx
+│   │   └── AboutCTA.jsx
+│   │
+│   ├── categories/
+│   │   ├── CategorySummary.jsx
+│   │   └── CategoryGrid.jsx
+│   │
+│   ├── contact/
+│   │   ├── ContactCards.jsx
+│   │   ├── ContactCard.jsx
+│   │   ├── BusinessHours.jsx
+│   │   └── ContactForm.jsx
+│   │
+│   ├── auth/
+│   │   ├── LoginForm.jsx
+│   │   └── SignupForm.jsx
+│   │
+│   ├── layout/
+│   │   ├── Navbar.jsx
+│   │   ├── DesktopNav.jsx
+│   │   ├── MobileMenu.jsx
+│   │   ├── MobileMenuButton.jsx
+│   │   ├── NavbarActions.jsx
+│   │   ├── Footer.jsx
+│   │   ├── FooterLinks.jsx
+│   │   └── FooterContact.jsx
+│   │
+│   ├── products/
+│   │   ├── PageHeader.jsx
+│   │   ├── ProductToolbar.jsx
+│   │   ├── SearchBar.jsx
+│   │   ├── CategoryFilter.jsx
+│   │   ├── ProductGrid.jsx
+│   │   └── ProductDetails.jsx
+│   │
+│   └── ui/
+│       └── Button.jsx
+│
+├── context/
+│   └── AuthContext.js
+│
+├── lib/
+│   └── api/
+│       ├── config.js
+│       ├── auth.js
+│       ├── user.js
+│       ├── products.js
+│       └── categories.js
+│
+├── constants/
+│   ├── navigation.js
+│   ├── features.js
+│   ├── testimonials.js
+│   ├── values.js
+│   ├── preparationProcess.js
+│   ├── trust.js
+│   └── contact.js
 ```
 
 ---
@@ -88,11 +111,48 @@ constants/
 
 * /
 * /products
+* /products/[slug]
 * /categories
 * /about
 * /contact
+* /login
+* /signup
 
 ---
+
+# API Integration
+
+### Authentication
+
+* POST /api/auth/register
+* POST /api/auth/login
+* POST /api/auth/logout
+
+### Users
+
+* GET /api/users/profile
+
+### Categories
+
+* GET /api/categories
+
+### Products
+
+* GET /api/products
+* GET /api/products/featured
+* GET /api/products/:slug
+
+---
+
+# State Management
+
+* React Context API
+* AuthContext
+* Local Component State
+* URL Search Parameters
+* Server Components for Data Fetching
+* Client Components for Interactive UI
+
 
 # Shared Layout
 
@@ -428,6 +488,45 @@ All UI components remain independent of the data source, making backend integrat
 
 ---
 
+## Authentication Flow
+
+### Features Implemented
+
+- User Registration
+- User Login
+- JWT Authentication using HttpOnly Cookies
+- Persistent Login after Page Refresh
+- Protected Profile API
+- Auth Context
+- Dynamic Navbar
+- Logout
+
+### Flow
+
+Signup/Login
+        ↓
+Backend verifies credentials
+        ↓
+JWT stored in HttpOnly Cookie
+        ↓
+AuthProvider loads
+        ↓
+GET /api/users/profile
+        ↓
+User stored in AuthContext
+        ↓
+Navbar updates automatically
+
+Logout
+        ↓
+Backend clears JWT cookie
+        ↓
+AuthContext clears user
+        ↓
+Navbar returns to Login state
+
+---
+
 # Design Principles
 
 * Mobile-first development
@@ -438,9 +537,16 @@ All UI components remain independent of the data source, making backend integrat
 * Lifted state management
 * Shared application layout
 * Single Responsibility Principle (SRP)
+* API-first frontend architecture
+* Backend-driven dynamic content
+* Authentication using JWT & HttpOnly Cookies
+* Context-based global authentication state
+* Persistent user sessions
+* Route-based dynamic navigation
+* Scalable and modular folder structure
+* Future-ready production architecture
 
 ---
-
 
 ## Current Progress
 
@@ -466,11 +572,26 @@ All UI components remain independent of the data source, making backend integrat
 * ✔ Product Slug Routing
 * ✔ Product Information Display
 * ✔ Product Detail Navigation
+* ✔ Product API Integration
+* ✔ Category API Integration
+* ✔ Featured Products API Integration
+* ✔ Dynamic Product Search from Backend
+* ✔ Dynamic Category Filter from Backend
+* ✔ Customer Registration
+* ✔ Customer Login
+* ✔ JWT Authentication (HttpOnly Cookies)
+* ✔ Persistent Login After Refresh
+* ✔ Authentication Context
+* ✔ Protected Profile API Integration
+* ✔ Dynamic Authentication Navbar
+* ✔ Customer Logout
+* ✔ End-to-End Authentication Flow
+* ✔ End-to-End Frontend & Backend Catalog Integration
 
 
 ---
 
-# Completed Phases
+# Completed Phases (Frontend Continuation of Backend - 8 Phases)
 
 ## Phase 1 — Homepage
 
@@ -500,8 +621,7 @@ All UI components remain independent of the data source, making backend integrat
 * ✔ Categories Page
 * ✔ About Page
 * ✔ Contact Page
-✔ Enhanced Product Data Model
-
+* ✔ Enhanced Product Data Model
 
 ---
 
@@ -516,56 +636,65 @@ All UI components remain independent of the data source, making backend integrat
 * Responsive product layout
 * Future API-ready architecture
 
+---
+
+## Phase 5 — Backend Integration
+
+* Connected Products page with Product API
+* Connected Categories page with Category API
+* Connected Product Details page with Product API
+* Replaced static constants with backend data
+* Connected Featured Products section with Featured Products API
+* Dynamic product search and category filtering
+* Authentication Context integration
+* Customer Registration UI
+* Customer Login UI
+* JWT Authentication using HttpOnly Cookies
+* Persistent Login after Page Refresh
+* Protected Profile API integration
+* Dynamic Navbar based on authentication state
+* Customer Logout
+* End-to-end frontend and backend integration (Authentication & Catalog)
 
 ---
 
 # Upcoming Roadmap
 
-## Phase 5 — Backend Integration
-
-- Connect Products page with Product API
-- Connect Categories page with Category API
-- Connect Product Details page with Product API
-- Replace static constants with backend data
-- Connect Contact Form with Contact API
-- End-to-end frontend and backend integration
-
----
-
 ## Phase 6 — Customer Features
 
-- Customer Registration UI
-- Customer Login UI
-- Customer Dashboard
-- Shopping Cart UI
-- Checkout Flow
-- Razorpay Checkout Integration
-- Order History
-- Profile Management
+* Customer Dashboard
+* Profile Page
+* Shopping Cart UI
+* Cart API Integration
+* Checkout Flow
+* Razorpay Checkout Integration
+* Order History
+* Profile Management
+* Address Management
 
 ---
 
 ## Phase 7 — Admin Dashboard
 
-- Admin Login
-- Dashboard Overview
-- Product Management (CRUD)
-- Category Management (CRUD)
-- Order Management
-- Customer Management
-- Image Upload Integration
+* Admin Login
+* Dashboard Overview
+* Product Management (CRUD)
+* Category Management (CRUD)
+* Order Management
+* Customer Management
+* Image Upload Integration
 
 ---
 
 ## Phase 8 — Deployment & Production
 
-- Cloudinary Integration
-- Frontend Deployment (Vercel)
-- Backend Deployment (Render)
-- Production Environment Configuration
-- Custom Domain
-- SSL Configuration
-- Logging & Monitoring
-- API Rate Limiting
-- Performance Optimization
-- Backup & Recovery Strategy
+* Cloudinary Integration
+* Frontend Deployment (Vercel)
+* Backend Deployment (Render)
+* Production Environment Configuration
+* Custom Domain
+* SSL Configuration
+* Logging & Monitoring
+* API Rate Limiting
+* Performance Optimization
+* Backup & Recovery Strategy
