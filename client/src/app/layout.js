@@ -1,6 +1,10 @@
 import { Poppins } from "next/font/google";
-import { AuthProvider } from "../context/AuthContext";
+
 import "./globals.css";
+
+import { AuthProvider } from "../context/AuthContext";
+import { CartProvider } from "../context/CartContext";
+
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 
@@ -24,13 +28,15 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <AuthProvider>
-          <Navbar />
+          <CartProvider>
+            <Navbar />
 
-          <main className="flex-1">
-            {children}
-          </main>
+            <main className="flex-1">
+              {children}
+            </main>
 
-          <Footer />
+            <Footer />
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

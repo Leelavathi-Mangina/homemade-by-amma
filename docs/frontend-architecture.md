@@ -586,7 +586,14 @@ Navbar returns to Login state
 * ✔ Dynamic Authentication Navbar
 * ✔ Customer Logout
 * ✔ End-to-End Authentication Flow
-* ✔ End-to-End Frontend & Backend Catalog Integration
+* ✔ End-to-End Frontend & Backend Catalog    Integration
+* ✔ Authentication UI
+* ✔ Auth Context
+* ✔ Persistent Login
+* ✔ Dynamic Navbar Authentication
+* ✔ Customer Profile Page
+* ✔ Protected Profile Route
+* ✔ Logout Functionality
 
 
 ---

@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import { login } from "../../lib/api/auth";
+import { login as loginApi } from "../../lib/api/auth";
+import { useAuth } from "../../context/AuthContext";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { login } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -29,7 +31,9 @@ export default function LoginPage() {
     try {
       setLoading(true);
 
-      await login(formData);
+      const user = await loginApi(formData);
+
+      login(user);
 
       alert("Login successful.");
 
@@ -44,7 +48,6 @@ export default function LoginPage() {
   return (
     <section className="flex min-h-screen items-center justify-center bg-orange-50 px-6 py-20">
       <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-lg">
-
         <h1 className="text-center text-3xl font-bold text-gray-900">
           Welcome Back
         </h1>
@@ -53,15 +56,9 @@ export default function LoginPage() {
           Login to continue shopping.
         </p>
 
-        <form
-          onSubmit={handleSubmit}
-          className="mt-8 space-y-5"
-        >
-
+        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           <div>
-            <label className="mb-2 block font-medium">
-              Email
-            </label>
+            <label className="mb-2 block font-medium">Email</label>
 
             <input
               type="email"
@@ -74,9 +71,7 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label className="mb-2 block font-medium">
-              Password
-            </label>
+            <label className="mb-2 block font-medium">Password</label>
 
             <input
               type="password"
@@ -95,7 +90,6 @@ export default function LoginPage() {
           >
             {loading ? "Logging In..." : "Login"}
           </button>
-
         </form>
 
         <p className="mt-6 text-center text-gray-600">
@@ -107,7 +101,6 @@ export default function LoginPage() {
             Sign Up
           </Link>
         </p>
-
       </div>
     </section>
   );
