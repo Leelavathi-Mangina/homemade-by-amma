@@ -18,18 +18,20 @@ export default function NavbarActions() {
 
   return (
     <div className="hidden items-center gap-4 md:flex">
-      <button
-        className="relative rounded-full p-2 transition-colors hover:bg-gray-100"
-        aria-label="Cart"
-      >
-        <ShoppingCart size={22} />
+      <Link href="/cart">
+        <button
+          className="relative rounded-full p-2 transition-colors hover:bg-gray-100"
+          aria-label="Cart"
+        >
+          <ShoppingCart size={22} />
 
-        {cartCount > 0 && (
-          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
-            {cartCount}
-          </span>
-        )}
-      </button>
+          {cartCount > 0 && (
+            <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
+              {cartCount}
+            </span>
+          )}
+        </button>
+      </Link>
 
       {loading ? (
         <span className="text-sm text-gray-500">Loading...</span>

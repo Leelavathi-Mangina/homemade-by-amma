@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import {
   getCart,
@@ -53,8 +48,9 @@ export function CartProvider({ children }) {
     setCart(updatedCart);
   }
 
-  async function updateCart(productId, quantity) {
+  async function updateCartItem(productId, quantity) {
     const updatedCart = await updateCartApi(productId, quantity);
+
     setCart(updatedCart);
   }
 
@@ -75,7 +71,7 @@ export function CartProvider({ children }) {
         loading,
         loadCart,
         addToCart,
-        updateCart,
+        updateCartItem,
         removeFromCart,
         clearCart,
       }}

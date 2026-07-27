@@ -59,6 +59,8 @@ const addToCart = asyncHandler(
 
     await cart.save();
 
+    await cart.populate("items.product");
+
     res.status(200).json(
       new ApiResponse(
         true,
@@ -122,6 +124,8 @@ const updateCartItem = asyncHandler(
 
     await cart.save();
 
+    await cart.populate("items.product");
+
     res.status(200).json(
       new ApiResponse(
         true,
@@ -156,6 +160,8 @@ const removeCartItem = asyncHandler(
 
     await cart.save();
 
+    await cart.populate("items.product");
+
     res.status(200).json(
       new ApiResponse(
         true,
@@ -185,6 +191,8 @@ const clearCart = asyncHandler(
     cart.items = [];
 
     await cart.save();
+
+    await cart.populate("items.product");
 
     res.status(200).json(
       new ApiResponse(
