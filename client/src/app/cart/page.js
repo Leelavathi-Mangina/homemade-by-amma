@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -96,7 +98,10 @@ export default function CartPage() {
                           onClick={() =>
                             updateCartItem(
                               item.product._id,
-                              Math.max(1, item.quantity - 1),
+                              Math.max(
+                                item.product.minOrderQuantity || 1,
+                                item.quantity - 1,
+                              ),
                             )
                           }
                         >
@@ -164,9 +169,11 @@ export default function CartPage() {
                   </span>
                 </div>
 
-                <button className="mt-8 w-full rounded-xl bg-amber-800 py-3 font-semibold text-white transition hover:bg-amber-900">
-                  Proceed to Checkout
-                </button>
+                <Link href="/checkout">
+                  <button className="mt-8 w-full rounded-xl bg-amber-800 py-3 font-semibold text-white transition hover:bg-amber-900">
+                    Proceed to Checkout
+                  </button>
+                </Link>
               </div>
             </>
           </div>

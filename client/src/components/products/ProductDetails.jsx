@@ -23,9 +23,11 @@ export default function ProductDetails({ product }) {
     try {
       setAdding(true);
 
-      await addToCart(product._id, 1);
+      await addToCart(product._id, quantity);
 
-      alert("Product added to cart.");
+      alert(
+  `${quantity} ${product.unit} of ${product.name} added to cart.`
+);
     } catch (error) {
       alert(error.message);
     } finally {
