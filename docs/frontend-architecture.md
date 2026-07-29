@@ -1,8 +1,3 @@
-# Frontend Architecture
-
-## Project Structure
-
-```text
 src/
 ├── app/
 │   ├── about/
@@ -18,7 +13,9 @@ src/
 │   ├── login/
 │   │   └── page.js
 │   ├── orders/
-│   │   └── page.js
+│   │   ├── page.js
+│   │   └── [orderId]/
+│   │       └── page.js
 │   ├── products/
 │   │   ├── page.js
 │   │   └── [slug]/
@@ -32,58 +29,20 @@ src/
 │   └── page.js
 │
 ├── components/
-│   ├── common/
-│   │   └── Logo.jsx
-│   │
-│   ├── home/
-│   │   ├── Hero.jsx
-│   │   ├── CategoriesPreview.jsx
-│   │   ├── CategoryCard.jsx
-│   │   ├── FeaturedProducts.jsx
-│   │   ├── ProductCard.jsx
-│   │   ├── WhyChooseUs.jsx
-│   │   ├── FeatureCard.jsx
-│   │   ├── Testimonials.jsx
-│   │   └── TestimonialCard.jsx
-│   │
 │   ├── about/
-│   │   ├── AboutHero.jsx
-│   │   ├── OurStory.jsx
-│   │   ├── OurValues.jsx
-│   │   ├── ValueCard.jsx
-│   │   ├── PreparationProcess.jsx
-│   │   ├── ProcessCard.jsx
-│   │   ├── WhyTrustUs.jsx
-│   │   ├── TrustCard.jsx
-│   │   └── AboutCTA.jsx
-│   │
 │   ├── categories/
-│   │   ├── CategorySummary.jsx
-│   │   └── CategoryGrid.jsx
-│   │
+│   ├── common/
 │   ├── contact/
-│   │   ├── ContactCards.jsx
-│   │   ├── ContactCard.jsx
-│   │   ├── BusinessHours.jsx
-│   │   └── ContactForm.jsx
-│   │
+│   ├── home/
 │   ├── layout/
-│   │   ├── Navbar.jsx
-│   │   ├── DesktopNav.jsx
-│   │   ├── MobileMenu.jsx
-│   │   ├── MobileMenuButton.jsx
-│   │   ├── NavbarActions.jsx
-│   │   ├── Footer.jsx
-│   │   ├── FooterLinks.jsx
-│   │   └── FooterContact.jsx
-│   │
 │   ├── products/
-│   │   ├── PageHeader.jsx
-│   │   ├── ProductToolbar.jsx
-│   │   ├── SearchBar.jsx
-│   │   ├── CategoryFilter.jsx
-│   │   ├── ProductGrid.jsx
-│   │   └── ProductDetails.jsx
+│   │
+│   ├── orders/
+│   │   ├── OrderCard.jsx
+│   │   ├── OrderItems.jsx
+│   │   ├── OrderSummary.jsx
+│   │   ├── OrderStatusBadge.jsx
+│   │   └── PaymentStatusBadge.jsx
 │   │
 │   ├── profile/
 │   │   ├── ProfileCard.jsx
@@ -114,26 +73,6 @@ src/
 │   ├── testimonials.js
 │   ├── trust.js
 │   └── values.js
-```
-
----
-
-# Routing
-
-- /
-- /products
-- /products/[slug]
-- /categories
-- /about
-- /contact
-- /signup
-- /login
-- /profile
-- /cart
-- /checkout
-- /orders
-
----
 
 # API Integration
 
@@ -181,7 +120,9 @@ src/
 - POST /api/orders
 - GET /api/orders/my-orders
 - GET /api/orders/:orderId
+
 ---
+
 # State Management
 
 - React Context API
@@ -352,6 +293,21 @@ CheckoutPage
 ```text
 OrdersPage
 └── Order List
+    └── OrderCard
+```
+
+---
+
+## Order Details Page
+
+```text
+OrderDetailsPage
+├── OrderItems
+│   └── OrderItem
+└── OrderSummary
+    ├── OrderStatusBadge
+    └── PaymentStatusBadge
+```
 ```
 
 
@@ -553,11 +509,15 @@ OrdersPage
 - Redirect to Orders page
 
 ---
-
 # Orders Features
 
 - Customer orders page
 - Order history
+- Individual order details page
+- Order summary
+- Ordered items display
+- Order status badge
+- Payment status badge
 - Backend order integration
 - Automatic redirect after successful order placement
 ---
@@ -753,14 +713,26 @@ Navbar Badge      Cart Page     Checkout
 
 ```text
 POST /api/orders
-GET /api/orders/my-orders
-GET /api/orders/:orderId
         │
         ▼
 Checkout
         │
         ▼
 Orders Page
+        │
+GET /api/orders/my-orders
+        │
+        ▼
+OrderCard
+        │
+        ▼
+Order Details
+        │
+GET /api/orders/:orderId
+        │
+        ▼
+OrderSummary
+OrderItems
 ```
 
 ---
@@ -1068,6 +1040,12 @@ Redirect to Orders Page
 - ✔ Customer Orders Page
 - ✔ Order Placement Flow
 - ✔ Order History Integration
+- ✔ Individual Order Details Page
+- ✔ Order Summary
+- ✔ Ordered Items Display
+- ✔ Order Status Badge
+- ✔ Payment Status Badge
+- ✔ Backend Order Details Integration
 
 ---
 
@@ -1166,6 +1144,11 @@ Redirect to Orders Page
 - ✔ Automatic Cart Clearing After Successful Order
 - ✔ Customer Orders Page
 - ✔ Order History Integration
+- ✔ Individual Order Details Page
+- ✔ Order Items Display
+- ✔ Order Status Badge
+- ✔ Payment Status Badge
+- ✔ Backend Order Details Integration
 
 ### Overall
 
@@ -1175,42 +1158,83 @@ Redirect to Orders Page
 
 # Upcoming Roadmap
 
-## Phase 6 — Customer Features
-
-- Razorpay Checkout Integration
-- Online Payment Flow
-- Payment Verification
-- Order Details Page
-- Address Management
-- Customer Dashboard Improvements
-- Order Status Tracking
-- Email Notifications
-
----
-
 ## Phase 7 — Admin Dashboard
 
+### Authentication
+
 - Admin Login
+- Protected Admin Routes
+- Admin Session Management
+
+### Dashboard
+
 - Dashboard Overview
-- Product Management (CRUD)
-- Category Management (CRUD)
-- Order Management
-- Customer Management
-- Image Upload Integration
-- Sales Analytics
+- Business Statistics
+- Recent Orders
+- Recent Customers
+
+### Order Management
+
+- View All Orders
+- View Individual Order
+- Update Order Status
+- Update Payment Status
+- Order Search & Filtering
+
+### Product Management
+
+- Add Product
+- Update Product
+- Delete Product
+- Product Image Management
+
+### Category Management
+
+- Add Category
+- Update Category
+- Delete Category
+
+### Customer Management
+
+- View Customers
+- Customer Order History
 
 ---
 
-## Phase 8 — Deployment & Production
+## Phase 8 — Payment Integration
+
+### Razorpay Integration
+
+- Razorpay Order Creation
+- Razorpay Checkout
+- Payment Verification
+- Payment Success Flow
+- Payment Failure Handling
+- Payment Status Synchronization
+- Invoice & Receipt Support
+
+---
+
+## Phase 9 — Deployment & Production
+
+### Media Management
 
 - Cloudinary Integration
+- Product Image Upload
+
+### Deployment
+
 - Frontend Deployment (Vercel)
 - Backend Deployment (Render)
 - Production Environment Configuration
+- Environment Variables
+
+### Production Readiness
+
 - Custom Domain
 - SSL Configuration
-- Logging & Monitoring
 - API Rate Limiting
+- Logging & Monitoring
 - Performance Optimization
 - Backup & Recovery Strategy
 - Production Security Hardening
