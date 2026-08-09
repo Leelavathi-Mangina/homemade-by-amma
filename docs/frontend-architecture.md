@@ -1,78 +1,87 @@
 src/
 ├── app/
-│   ├── about/
-│   │   └── page.js
-│   ├── cart/
-│   │   └── page.js
-│   ├── categories/
-│   │   └── page.js
-│   ├── checkout/
-│   │   └── page.js
-│   ├── contact/
-│   │   └── page.js
-│   ├── login/
-│   │   └── page.js
-│   ├── orders/
-│   │   ├── page.js
-│   │   └── [orderId]/
-│   │       └── page.js
-│   ├── products/
-│   │   ├── page.js
-│   │   └── [slug]/
-│   │       └── page.js
-│   ├── profile/
-│   │   └── page.js
-│   ├── signup/
-│   │   └── page.js
-│   ├── globals.css
-│   ├── layout.js
-│   └── page.js
+│ ├── about/
+│ │ └── page.js
+│ ├── cart/
+│ │ └── page.js
+│ ├── categories/
+│ │ └── page.js
+│ ├── checkout/
+│ │ └── page.js
+│ ├── contact/
+│ │ └── page.js
+│ ├── login/
+│ │ └── page.js
+│ ├── orders/
+│ │ ├── page.js
+│ │ └── [orderId]/
+│ │ └── page.js
+│ ├── products/
+│ │ ├── page.js
+│ │ └── [slug]/
+│ │ └── page.js
+│ ├── profile/
+│ │ └── page.js
+│ ├── signup/
+│ │ └── page.js
+│ ├── globals.css
+│ ├── layout.js
+│ ├── admin/
+│ │ │ ├── page.js
+│ │ │ └── orders/
+│ │ │ └── [orderId]/
+│ │ │ └── page.js── page.js
 │
 ├── components/
-│   ├── about/
-│   ├── categories/
-│   ├── common/
-│   ├── contact/
-│   ├── home/
-│   ├── layout/
-│   ├── products/
-│   │
-│   ├── orders/
-│   │   ├── OrderCard.jsx
-│   │   ├── OrderItems.jsx
-│   │   ├── OrderSummary.jsx
-│   │   ├── OrderStatusBadge.jsx
-│   │   └── PaymentStatusBadge.jsx
-│   │
-│   ├── profile/
-│   │   ├── ProfileCard.jsx
-│   │   └── ProfileActions.jsx
-│   │
-│   └── ui/
-│       └── Button.jsx
+│ ├── about/
+│ ├── categories/
+│ ├── common/
+│ ├── contact/
+│ ├── home/
+│ ├── layout/
+│ ├── products/
+│ │
+│ ├── orders/
+│ │ ├── OrderCard.jsx
+│ │ ├── OrderItems.jsx
+│ │ ├── OrderSummary.jsx
+│ │ ├── OrderStatusBadge.jsx
+│ │ └── PaymentStatusBadge.jsx
+│ │
+│ ├── profile/
+│ │ ├── ProfileCard.jsx
+│ │ └── ProfileActions.jsx
+│ │
+│ └── ui/
+│ └── Button.jsx
 │
 ├── context/
-│   ├── AuthContext.js
-│   └── CartContext.js
+│ ├── AuthContext.js
+│ └── CartContext.js
 │
 ├── lib/
-│   └── api/
-│       ├── auth.js
-│       ├── cart.js
-│       ├── category.js
-│       ├── config.js
-│       ├── order.js
-│       ├── product.js
-│       └── user.js
+│ └── api/
+│ ├── auth.js
+│ ├── cart.js
+│ ├── category.js
+│ ├── config.js
+│ ├── order.js
+│ ├── product.js
+│ └── user.js
 │
 ├── constants/
-│   ├── contact.js
-│   ├── features.js
-│   ├── navigation.js
-│   ├── preparationProcess.js
-│   ├── testimonials.js
-│   ├── trust.js
-│   └── values.js
+│ ├── contact.js
+│ ├── features.js
+│ ├── navigation.js
+│ ├── preparationProcess.js
+│ ├── testimonials.js
+│ ├── trust.js
+│ └── values.js
+├── admin/
+│ │ │ ├── DashboardCard.jsx
+│ │ │ ├── DashboardGrid.jsx
+│ │ │ └── orders/
+│ │ │ └── AdminOrderCard.jsx
 
 # API Integration
 
@@ -308,7 +317,241 @@ OrderDetailsPage
     ├── OrderStatusBadge
     └── PaymentStatusBadge
 ```
+
+
+---
+
+## Admin Dashboard
+
+```text
+AdminDashboardPage
+├── Authentication Guard
+│   ├── AuthContext
+│   └── Admin Role Check
+│
+└── DashboardGrid
+    ├── DashboardCard → Products
+    ├── DashboardCard → Categories
+    ├── DashboardCard → Orders
+    └── DashboardCard → Customers
 ```
+
+The Admin Dashboard is protected using role-based access control.
+
+```text
+AuthContext
+     │
+     ▼
+Check Authentication
+     │
+     ├── Not authenticated ──► /login
+     │
+     ├── Customer ────────────► /
+     │
+     └── Admin ───────────────► /admin
+```
+
+Frontend protection provides the user experience layer, while backend middleware remains responsible for enforcing actual authorization.
+
+---
+
+## Admin Order Management
+
+```text
+AdminDashboardPage
+        │
+        ▼
+     Orders
+        │
+        ▼
+Admin Orders Page
+        │
+        ├───────────────┐
+        ▼               ▼
+AdminOrderCard    View Details
+                        │
+                        ▼
+              AdminOrderDetailsPage
+                        │
+                 ┌──────┴──────┐
+                 ▼             ▼
+          Order Status    Payment Status
+```
+
+### Admin Order Features
+
+* ✔ View all customer orders
+* ✔ View individual order details
+* ✔ View customer information
+* ✔ View ordered items
+* ✔ View delivery information
+* ✔ View order total
+* ✔ View preferred delivery date
+* ✔ Update order status
+* ✔ Update payment status
+* ✔ Protected Admin API access
+* ✔ Role-based Admin authorization
+
+### Order Status Workflow
+
+Order status transitions are controlled by backend business rules.
+
+```text
+Pending
+   │
+   ├──► Confirmed
+   │       │
+   │       └──► Preparing
+   │                │
+   │                └──► Ready for Delivery
+   │                         │
+   │                         └──► Out for Delivery
+   │                                  │
+   │                                  └──► Delivered
+   │
+   └──► Cancelled
+```
+
+The frontend status selector follows the supported workflow, while the backend validates every transition before updating MongoDB.
+
+### Payment Status Workflow
+
+Payment status is maintained separately from order fulfillment status.
+
+```text
+Pending
+   ├──► Paid
+   └──► Failed
+
+Paid
+   └──► Refunded
+```
+
+This separation allows the business to track fulfillment and payment independently.
+
+For example:
+
+```text
+Order Status: Delivered
+Payment Status: Refunded
+```
+
+can represent an order that was delivered and subsequently refunded.
+
+---
+
+## Admin Order API Integration
+
+Admin order operations use the existing API abstraction in:
+
+```text
+src/lib/api/order.js
+```
+
+```text
+Admin UI
+   │
+   ▼
+API Helper
+   │
+   ▼
+Admin REST API
+   │
+   ▼
+protect
+   │
+   ▼
+adminOnly
+   │
+   ▼
+Order Controller
+   │
+   ▼
+MongoDB
+```
+
+### Admin Order Endpoints
+
+```text
+GET   /api/admin/orders
+GET   /api/admin/orders/:orderId
+PATCH /api/admin/orders/:orderId/status
+PATCH /api/admin/orders/:orderId/payment-status
+```
+
+The frontend sends authenticated requests using:
+
+```text
+credentials: "include"
+```
+
+because authentication is maintained through HttpOnly cookies.
+
+---
+
+## Admin Order State Management
+
+The Admin Order Details page uses local component state:
+
+```text
+order
+pageLoading
+updatingStatus
+updatingPaymentStatus
+```
+
+`order` stores the currently displayed order.
+
+`pageLoading` controls the initial order-loading state.
+
+`updatingStatus` prevents repeated order-status requests while an update is in progress.
+
+`updatingPaymentStatus` prevents repeated payment-status requests while an update is in progress.
+
+After a successful update, the local order state is synchronized with the backend response.
+
+---
+
+## Admin Security Architecture
+
+Admin functionality follows defense-in-depth:
+
+```text
+Frontend Route Guard
+        │
+        ▼
+AuthContext
+        │
+        ▼
+Admin Role Check
+        │
+        ▼
+Authenticated API Request
+        │
+        ▼
+protect Middleware
+        │
+        ▼
+adminOnly Middleware
+        │
+        ▼
+Controller
+```
+
+The frontend must never be considered the final security boundary.
+
+The backend validates:
+
+* authentication
+* admin role
+* order-status transitions
+* payment-status transitions
+* requested resource existence
+
+This keeps business rules and authorization enforced on the server.
+
+
+````
 
 
 ---
@@ -547,7 +790,7 @@ NavbarActions      ProfilePage      CartPage     CheckoutPage
         │
         ▼
 Login / Logout
-```
+````
 
 ---
 
@@ -900,6 +1143,7 @@ CartContext reloads
         ▼
 Redirect to Orders Page
 ```
+
 ---
 
 # Design Principles
@@ -1158,83 +1402,126 @@ Redirect to Orders Page
 
 # Upcoming Roadmap
 
-## Phase 7 — Admin Dashboard
+# Upcoming Roadmap
 
-### Authentication
+## Phase 6 — Admin Dashboard
 
-- Admin Login
-- Protected Admin Routes
-- Admin Session Management
+### Admin Authentication & Protection
+
+* ✔ Admin Login
+* ✔ Protected Admin Routes
+* ✔ Admin Role Verification
+* ✔ Admin Session Management
 
 ### Dashboard
 
-- Dashboard Overview
-- Business Statistics
-- Recent Orders
-- Recent Customers
+* ✔ Dashboard Overview
+* ✔ Dashboard Navigation
+* ✔ Products Module Entry
+* ✔ Categories Module Entry
+* ✔ Orders Module Entry
+* ✔ Customers Module Entry
 
 ### Order Management
 
-- View All Orders
-- View Individual Order
-- Update Order Status
-- Update Payment Status
-- Order Search & Filtering
+* ✔ View All Orders
+* ✔ View Individual Order
+* ✔ Customer Information
+* ✔ Ordered Items
+* ✔ Delivery Information
+* ✔ Order Summary
+* ✔ Update Order Status
+* ✔ Valid Order Status Transitions
+* ✔ Update Payment Status
+* ✔ Valid Payment Status Transitions
 
-### Product Management
+### Remaining Admin Features
 
-- Add Product
-- Update Product
-- Delete Product
-- Product Image Management
-
-### Category Management
-
-- Add Category
-- Update Category
-- Delete Category
-
-### Customer Management
-
-- View Customers
-- Customer Order History
+* Product Management (CRUD)
+* Category Management (CRUD)
+* Customer Management
+* Product Image Management
+* Sales Analytics
+* Dashboard Statistics
+* Order Search & Filtering
 
 ---
 
-## Phase 8 — Payment Integration
+## Phase 7 — Razorpay Payment Integration
 
-### Razorpay Integration
+### Payment Setup
 
-- Razorpay Order Creation
-- Razorpay Checkout
-- Payment Verification
-- Payment Success Flow
-- Payment Failure Handling
-- Payment Status Synchronization
-- Invoice & Receipt Support
+* Razorpay Account Configuration
+* Razorpay API Key Configuration
+* Secure Environment Variables
+* Backend Razorpay Service
+
+### Payment Flow
+
+* Razorpay Order Creation
+* Customer Checkout Integration
+* Razorpay Checkout UI
+* Payment Success Handling
+* Payment Failure Handling
+* Payment Signature Verification
+* Secure Payment Amount Validation
+* Order Payment Status Synchronization
+
+### Order Integration
+
+```text
+Customer Checkout
+       │
+       ▼
+Create Backend Order
+       │
+       ▼
+Create Razorpay Order
+       │
+       ▼
+Razorpay Checkout
+       │
+       ├── Success ──► Verify Payment
+       │                    │
+       │                    ▼
+       │              Mark Payment Paid
+       │
+       └── Failure ──► Mark Payment Failed
+```
+
+The backend remains the source of truth for payment amount and payment verification.
 
 ---
 
-## Phase 9 — Deployment & Production
+## Phase 8 — Deployment & Production
 
 ### Media Management
 
-- Cloudinary Integration
-- Product Image Upload
+* Cloudinary Integration
+* Product Image Upload
+* Image Optimization
 
 ### Deployment
 
-- Frontend Deployment (Vercel)
-- Backend Deployment (Render)
-- Production Environment Configuration
-- Environment Variables
+* Frontend Deployment (Vercel)
+* Backend Deployment (Render)
+* Production Environment Configuration
+* Environment Variables
+* MongoDB Atlas Production Configuration
 
-### Production Readiness
+### Domain & Security
 
-- Custom Domain
-- SSL Configuration
-- API Rate Limiting
-- Logging & Monitoring
-- Performance Optimization
-- Backup & Recovery Strategy
-- Production Security Hardening
+* Custom Domain
+* SSL Configuration
+* API Rate Limiting
+* CORS Production Configuration
+* Secure Cookie Configuration
+* Production Security Hardening
+
+### Reliability & Performance
+
+* Logging & Monitoring
+* Performance Optimization
+* Error Handling
+* Backup & Recovery Strategy
+* Production Testing
