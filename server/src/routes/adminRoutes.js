@@ -5,8 +5,14 @@ const {
   adminOnly,
 } = require("../middleware/authMiddleware");
 
-const ApiResponse =
-  require("../utils/ApiResponse");
+const ApiResponse = require("../utils/ApiResponse");
+
+const {
+  getAllOrders,
+  getSingleOrder,
+  updateOrderStatus,
+  updatePaymentStatus,
+} = require("../controllers/orderController");
 
 const router = express.Router();
 
@@ -23,6 +29,34 @@ router.get(
       )
     );
   }
+);
+
+router.get(
+  "/orders",
+  protect,
+  adminOnly,
+  getAllOrders
+);
+
+router.get(
+  "/orders/:orderId",
+  protect,
+  adminOnly,
+  getSingleOrder
+);
+
+router.patch(
+  "/orders/:orderId/status",
+  protect,
+  adminOnly,
+  updateOrderStatus
+);
+
+router.patch(
+  "/orders/:orderId/payment-status",
+  protect,
+  adminOnly,
+  updatePaymentStatus
 );
 
 module.exports = router;
