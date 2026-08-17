@@ -16,3 +16,4 @@ export async function getProductBySlug(slug) {
 
   return result.data;
 }
+

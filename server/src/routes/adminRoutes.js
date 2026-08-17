@@ -14,6 +14,14 @@ const {
   updatePaymentStatus,
 } = require("../controllers/orderController");
 
+
+const {
+  createProduct,
+  getProducts,
+  updateProduct,
+  updateProductAvailability,
+} = require("../controllers/productController");
+
 const router = express.Router();
 
 router.get(
@@ -57,6 +65,35 @@ router.patch(
   protect,
   adminOnly,
   updatePaymentStatus
+);
+
+router.patch(
+  "/products/:productId",
+  protect,
+  adminOnly,
+  updateProduct
+);
+
+router.patch(
+  "/products/:productId/availability",
+  protect,
+  adminOnly,
+  updateProductAvailability
+);
+
+
+router.post(
+  "/products",
+  protect,
+  adminOnly,
+  createProduct
+);
+
+router.get(
+  "/products",
+  protect,
+  adminOnly,
+  getProducts
 );
 
 module.exports = router;

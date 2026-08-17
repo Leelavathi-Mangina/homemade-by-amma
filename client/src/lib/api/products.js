@@ -61,3 +61,80 @@ export async function getProductBySlug(slug) {
 
   return result.data;
 }
+
+
+export async function updateProductAvailability(
+  slug,
+  isAvailable
+) {
+  const response = await fetch(
+    `${API_BASE_URL}/products/${slug}/availability`,
+    {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        isAvailable,
+      }),
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result.data;
+}
+
+export async function updateFeaturedStatus(
+  slug,
+  featured
+) {
+  const response = await fetch(
+    `${API_BASE_URL}/products/${slug}/featured`,
+    {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        featured,
+      }),
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result.data;
+}
+
+export async function updateProduct(productId, productData) {
+  const response = await fetch(
+    `${API_BASE_URL}/products/${productId}`,
+    {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result.data;
+}
