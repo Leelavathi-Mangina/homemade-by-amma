@@ -68,9 +68,9 @@ export default function CartPage() {
                     className="flex gap-6 rounded-2xl bg-white p-6 shadow"
                   >
                     <div className="flex h-28 w-28 items-center justify-center rounded-2xl bg-orange-100 text-5xl">
-                      {item.product.images?.length > 0 ? (
+                      {item.product.images?.[0]?.url ? (
                         <img
-                          src={item.product.images[0]}
+                          src={item.product.images[0].url}
                           alt={item.product.name}
                           className="h-full w-full rounded-2xl object-cover"
                         />

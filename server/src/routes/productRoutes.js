@@ -1,4 +1,9 @@
 const express = require("express");
+const {
+  protect,
+  adminOnly,
+} = require("../middleware/authMiddleware");
+const upload = require("../middleware/uploadMiddleware");
 
 const {
   createProduct,
@@ -8,6 +13,7 @@ const {
   getProductBySlug,
   updateFeaturedStatus,
   updateProductAvailability,
+  uploadProductImage,
 } = require("../controllers/productController");
 
 const router = express.Router();
@@ -40,6 +46,14 @@ router.patch("/:slug/featured", updateFeaturedStatus);
  * PATCH /api/products/test-kaju-katli/availability
  */
 router.patch("/:slug/availability", updateProductAvailability);
+
+router.post(
+  "/:productId/images",
+  protect,
+  adminOnly,
+  upload.single("image"),
+  uploadProductImage
+);
 
 router.get("/:slug", getProductBySlug);
 

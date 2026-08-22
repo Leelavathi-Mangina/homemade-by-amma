@@ -7,6 +7,7 @@ import { useAuth } from "../../../../context/AuthContext";
 import {
   getProducts,
   updateProduct,
+  uploadProductImage,
 } from "../../../../lib/api/products";
 
 export default function AdminEditProductPage() {
@@ -18,6 +19,9 @@ export default function AdminEditProductPage() {
   const [product, setProduct] = useState(null);
   const [pageLoading, setPageLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -109,6 +113,45 @@ export default function AdminEditProductPage() {
       ...currentData,
       [name]: type === "checkbox" ? checked : value,
     }));
+  }
+
+  async function handleImageUpload() {
+    if (!selectedImage) {
+      alert("Please select an image first.");
+      return;
+    }
+
+    try {
+      setUploadingImage(true);
+
+      const result = await uploadProductImage(
+        params.productId,
+        selectedImage
+      );
+
+      setProduct((currentProduct) => ({
+        ...currentProduct,
+        images: [
+          ...(currentProduct.images || []),
+          result.image,
+        ],
+      }));
+
+      setSelectedImage(null);
+
+      const fileInput =
+        document.getElementById("product-image");
+
+      if (fileInput) {
+        fileInput.value = "";
+      }
+
+      alert("Image uploaded successfully.");
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setUploadingImage(false);
+    }
   }
 
   async function handleSubmit(event) {
@@ -478,13 +521,85 @@ export default function AdminEditProductPage() {
 
           </div>
 
+          {/* Product Images */}
+          <div className="rounded-2xl bg-white p-6 shadow">
+
+            <h2 className="text-2xl font-bold text-gray-900">
+              Product Images
+            </h2>
+
+            <p className="mt-2 text-sm text-gray-600">
+              Upload images that customers will see for this product.
+            </p>
+
+            {product.images && product.images.length > 0 && (
+              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+                {product.images.map((image) => (
+                  <div
+                    key={image.publicId}
+                    className="overflow-hidden rounded-xl border bg-white"
+                  >
+                    <img
+                      src={image.url}
+                      alt={product.name}
+                      className="h-48 w-full object-cover"
+                    />
+                  </div>
+                ))}
+
+              </div>
+            )}
+
+            <div className="mt-6">
+              <label
+                htmlFor="product-image"
+                className="block text-sm font-semibold text-gray-900"
+              >
+                Choose Image
+              </label>
+
+              <input
+                id="product-image"
+                type="file"
+                accept="image/*"
+                onChange={(event) => {
+                  setSelectedImage(
+                    event.target.files?.[0] || null
+                  );
+                }}
+                className="mt-2 block w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm"
+              />
+            </div>
+
+            {selectedImage && (
+              <p className="mt-2 text-sm text-gray-600">
+                Selected: {selectedImage.name}
+              </p>
+            )}
+
+            <button
+              type="button"
+              onClick={handleImageUpload}
+              disabled={
+                !selectedImage || uploadingImage
+              }
+              className="mt-4 rounded-xl bg-amber-800 px-5 py-3 font-semibold text-white transition hover:bg-amber-900 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {uploadingImage
+                ? "Uploading..."
+                : "Upload Image"}
+            </button>
+
+          </div>
+
           {/* Actions */}
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-end">
 
             <button
               type="button"
               onClick={() => router.push("/admin/products")}
-              disabled={saving}
+              disabled={saving || uploadingImage}
               className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Cancel
@@ -492,7 +607,7 @@ export default function AdminEditProductPage() {
 
             <button
               type="submit"
-              disabled={saving}
+              disabled={saving || uploadingImage}
               className="rounded-xl bg-amber-800 px-6 py-3 font-semibold text-white transition hover:bg-amber-900 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {saving ? "Saving Changes..." : "Save Changes"}

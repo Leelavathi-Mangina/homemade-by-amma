@@ -3,6 +3,11 @@ const Product = require("../models/Product");
 const ApiResponse = require("../utils/ApiResponse");
 const asyncHandler = require("../utils/asyncHandler");
 
+const {
+  uploadImage,
+  deleteImage,
+} = require("../services/cloudinaryService");
+
 const createProduct = asyncHandler(async (req, res) => {
   const {
     productId,
@@ -191,6 +196,50 @@ const updateProductAvailability = asyncHandler(async (req, res) => {
   );
 });
 
+const uploadProductImage = asyncHandler(async (req, res) => {
+  const { productId } = req.params;
+
+  if (!req.file) {
+    return res
+      .status(400)
+      .json(new ApiResponse(false, "Product image is required"));
+  }
+
+  const product = await Product.findOne({ productId });
+
+  if (!product) {
+    return res
+      .status(404)
+      .json(new ApiResponse(false, "Product not found"));
+  }
+
+  const uploadedImage = await uploadImage(
+    req.file.buffer,
+    `homemade-by-amma/products/${product.productId}`
+  );
+
+  product.images.push({
+    url: uploadedImage.url,
+    publicId: uploadedImage.publicId,
+  });
+
+  await product.save();
+
+  res.status(201).json(
+    new ApiResponse(
+      true,
+      "Product image uploaded successfully",
+      {
+        productId: product.productId,
+        image: {
+          url: uploadedImage.url,
+          publicId: uploadedImage.publicId,
+        },
+      }
+    )
+  );
+});
+
 const getProducts = asyncHandler(async (req, res) => {
   const { category, search } = req.query;
 
@@ -293,6 +342,7 @@ module.exports = {
   createProduct,
   updateProduct,
   updateProductAvailability,
+  uploadProductImage,
   getProducts,
   getFeaturedProducts,
   getProductBySlug,

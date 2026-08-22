@@ -138,3 +138,26 @@ export async function updateProduct(productId, productData) {
 
   return result.data;
 }
+
+export async function uploadProductImage(productId, file) {
+  const formData = new FormData();
+
+  formData.append("image", file);
+
+  const response = await fetch(
+    `${API_BASE_URL}/products/${productId}/images`,
+    {
+      method: "POST",
+      credentials: "include",
+      body: formData,
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result.data;
+}

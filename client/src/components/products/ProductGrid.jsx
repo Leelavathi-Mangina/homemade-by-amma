@@ -44,7 +44,7 @@ export default function ProductGrid({
   if (loading) {
     return (
       <section className="py-20 text-center">
-        <p className="text-gray-600 text-lg">
+        <p className="text-lg text-gray-600">
           Loading products...
         </p>
       </section>
@@ -96,9 +96,9 @@ export default function ProductGrid({
           {filteredProducts.map((product) => (
             <ProductCard
               key={product._id}
-              image={product.image}
+              image={product.images?.[0]?.url || "🍬"}
               name={product.name}
-              category={product.category?.name}
+              category={product.category?.name || ""}
               price={product.price}
               unit={product.unit}
               shortDescription={product.shortDescription}

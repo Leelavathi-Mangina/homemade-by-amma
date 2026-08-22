@@ -25,9 +25,7 @@ export default function ProductDetails({ product }) {
 
       await addToCart(product._id, quantity);
 
-      alert(
-  `${quantity} ${product.unit} of ${product.name} added to cart.`
-);
+      alert(`${quantity} ${product.unit} of ${product.name} added to cart.`);
     } catch (error) {
       alert(error.message);
     } finally {
@@ -51,9 +49,9 @@ export default function ProductDetails({ product }) {
         <div className="grid gap-12 md:grid-cols-2">
           {/* Product Image */}
           <div className="flex h-96 items-center justify-center rounded-3xl bg-gradient-to-br from-orange-50 to-amber-100 text-9xl">
-            {product.images?.length > 0 ? (
+            {product.images?.[0]?.url ? (
               <img
-                src={product.images[0]}
+                src={product.images[0].url}
                 alt={product.name}
                 className="h-full w-full rounded-3xl object-cover"
               />
