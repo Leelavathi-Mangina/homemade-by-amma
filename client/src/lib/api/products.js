@@ -161,3 +161,58 @@ export async function uploadProductImage(productId, file) {
 
   return result.data;
 }
+
+export async function deleteProductImage(
+  productId,
+  publicId
+) {
+  const response = await fetch(
+    `${API_BASE_URL}/products/${productId}/images`,
+    {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        publicId,
+      }),
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result.data;
+}
+
+export async function replaceProductImage(
+  productId,
+  publicId,
+  file
+) {
+  const formData = new FormData();
+
+  formData.append("publicId", publicId);
+  formData.append("image", file);
+
+  const response = await fetch(
+    `${API_BASE_URL}/products/${productId}/images`,
+    {
+      method: "PATCH",
+      credentials: "include",
+      body: formData,
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result.data;
+}

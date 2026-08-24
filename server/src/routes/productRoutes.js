@@ -14,6 +14,8 @@ const {
   updateFeaturedStatus,
   updateProductAvailability,
   uploadProductImage,
+  deleteProductImage,
+  replaceProductImage,
 } = require("../controllers/productController");
 
 const router = express.Router();
@@ -53,6 +55,21 @@ router.post(
   adminOnly,
   upload.single("image"),
   uploadProductImage
+);
+
+router.delete(
+  "/:productId/images",
+  protect,
+  adminOnly,
+  deleteProductImage
+);
+
+router.patch(
+  "/:productId/images",
+  protect,
+  adminOnly,
+  upload.single("image"),
+  replaceProductImage
 );
 
 router.get("/:slug", getProductBySlug);

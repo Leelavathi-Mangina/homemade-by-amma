@@ -240,6 +240,149 @@ const uploadProductImage = asyncHandler(async (req, res) => {
   );
 });
 
+const deleteProductImage = asyncHandler(async (req, res) => {
+  const { productId } = req.params;
+  const { publicId } = req.body;
+
+  if (!publicId) {
+    return res
+      .status(400)
+      .json(
+        new ApiResponse(
+          false,
+          "Image publicId is required"
+        )
+      );
+  }
+
+  const product = await Product.findOne({ productId });
+
+  if (!product) {
+    return res
+      .status(404)
+      .json(
+        new ApiResponse(
+          false,
+          "Product not found"
+        )
+      );
+  }
+
+  const imageExists = product.images.some(
+    (image) => image.publicId === publicId
+  );
+
+  if (!imageExists) {
+    return res
+      .status(404)
+      .json(
+        new ApiResponse(
+          false,
+          "Image not found for this product"
+        )
+      );
+  }
+
+  await deleteImage(publicId);
+
+  product.images = product.images.filter(
+    (image) => image.publicId !== publicId
+  );
+
+  await product.save();
+
+  res.status(200).json(
+    new ApiResponse(
+      true,
+      "Product image deleted successfully",
+      {
+        productId: product.productId,
+        images: product.images,
+      }
+    )
+  );
+});
+
+const replaceProductImage = asyncHandler(async (req, res) => {
+  const { productId } = req.params;
+  const { publicId } = req.body;
+
+  if (!req.file) {
+    return res
+      .status(400)
+      .json(
+        new ApiResponse(
+          false,
+          "New product image is required"
+        )
+      );
+  }
+
+  if (!publicId) {
+    return res
+      .status(400)
+      .json(
+        new ApiResponse(
+          false,
+          "Existing image publicId is required"
+        )
+      );
+  }
+
+  const product = await Product.findOne({ productId });
+
+  if (!product) {
+    return res
+      .status(404)
+      .json(
+        new ApiResponse(
+          false,
+          "Product not found"
+        )
+      );
+  }
+
+  const imageIndex = product.images.findIndex(
+    (image) => image.publicId === publicId
+  );
+
+  if (imageIndex === -1) {
+    return res
+      .status(404)
+      .json(
+        new ApiResponse(
+          false,
+          "Image not found for this product"
+        )
+      );
+  }
+
+  const uploadedImage = await uploadImage(
+    req.file.buffer,
+    `homemade-by-amma/products/${product.productId}`
+  );
+
+  await deleteImage(publicId);
+
+  product.images[imageIndex] = {
+    url: uploadedImage.url,
+    publicId: uploadedImage.publicId,
+  };
+
+  await product.save();
+
+  res.status(200).json(
+    new ApiResponse(
+      true,
+      "Product image replaced successfully",
+      {
+        productId: product.productId,
+        images: product.images,
+      }
+    )
+  );
+});
+
 const getProducts = asyncHandler(async (req, res) => {
   const { category, search } = req.query;
 
@@ -343,6 +486,8 @@ module.exports = {
   updateProduct,
   updateProductAvailability,
   uploadProductImage,
+  deleteProductImage,
+  replaceProductImage,
   getProducts,
   getFeaturedProducts,
   getProductBySlug,
